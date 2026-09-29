@@ -96,7 +96,7 @@ function esc(v){return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 function changed(x){const s=String(x.status||'').toLowerCase(),n=String(x.note||'').toLowerCase();return s.includes('thay đổi')||s.includes('thay doi')||n.includes('đổi')||n.includes('doi')}
 function url(v){const u=String(v||'').trim();return /^https?:\/\//i.test(u)?u:''}
 function attachment(x){const u=url(x.file);return u?'<a class="action file" href="'+esc(u)+'" target="_blank" rel="noopener">📎 Tài liệu</a>':''}
-function prepLink(x){const u=url(x.prep);return u?'<a class="action prep" href="'+esc(u)+'" target="_blank" rel="noopener">📑 Chuẩn bị</a>':''}
+function prepLink(x){const u=url(x.prep);return u?'<a class="action prep" href="'+esc(u)+'" target="_blank" rel="noopener">📑 Chuẩn bị</a>':'<span class="action prep disabled" title="Chưa có nội dung chuẩn bị">📑 Chuẩn bị</span>'}
 
 function sortedEvents(d){const k=key(d);return scheduleData.filter(x=>{const z=parseDate(x.date);return z&&key(z)===k}).sort((a,b)=>timeVal(a.time)-timeVal(b.time))}
 function eventHtml(x){const c=changed(x);let h='<article class="event '+(c?'changed':'')+'"><div class="event-time">'+esc(x.time)+'</div><div class="event-content"><div class="event-title">'+esc(x.title)+'</div>';if(x.place)h+='<div class="event-meta"><div>📍 '+esc(x.place)+'</div>';if(x.people)h+='<div>👥 '+esc(x.people)+'</div>';h+='</div>';if(x.note)h+='<div class="event-note">📝 '+esc(x.note)+'</div>';if(x.status)h+='<span class="status '+(c?'changed':'')+'">'+esc(x.status)+'</span>';h+='<div class="actions">'+attachment(x)+prepLink(x)+'</div></div></article>';return h}
