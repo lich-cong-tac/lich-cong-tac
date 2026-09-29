@@ -9,423 +9,108 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;background:#f4f7fb;color:#172033;font-family:"Be Vietnam Pro",Arial,sans-serif}
-.header{background:linear-gradient(135deg,#082b59,#124d8f);color:#fff;text-align:center;padding:20px 15px;box-shadow:0 3px 12px #0002}
-.header-title{font-size:28px;font-weight:800}.header-subtitle{margin-top:5px;font-size:13px;opacity:.9}
-.container{max-width:1000px;margin:auto;padding:16px 13px}.section{margin-bottom:28px}
-.loading{text-align:center;padding:70px 20px}.spinner{width:42px;height:42px;margin:auto auto 16px;border:4px solid #dce5ef;border-top-color:#0b4f91;border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}.loading-text{font-size:18px;font-weight:600}
-.error-box{display:none;background:#fff;margin:30px auto;padding:25px;border-radius:18px;border-left:6px solid #c62828;text-align:center;box-shadow:0 5px 18px #0001}
-.error-title{font-size:22px;font-weight:800;color:#b71c1c}.error-text{font-size:16px;line-height:1.6;color:#666;margin:8px 0 17px}
-.reload-btn{border:0;border-radius:12px;padding:13px 24px;background:#0b4f91;color:#fff;font:700 17px "Be Vietnam Pro";cursor:pointer}
-.section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px;color:#0b2d5c;font-size:25px;font-weight:800}
-.section-title:before{content:"";width:6px;height:29px;border-radius:5px;background:#d4a72c}
-.today-date{display:inline-block;background:#0b2d5c;color:#fff;padding:8px 12px;border-radius:9px;font-size:16px;font-weight:700;margin-bottom:12px}
-.today-empty{background:#fff;border-radius:16px;padding:28px 20px;text-align:center;color:#777;font-size:17px;box-shadow:0 3px 12px #0001}
-.event-card{background:#fff;border-radius:17px;margin-bottom:13px;padding:17px 14px;box-shadow:0 4px 15px #0001;border-left:5px solid #0b4f91}
-.event-card.changed,.week-event.changed{border-left-color:#c62828}
-.event-top{display:flex;gap:11px}.time-box{flex:0 0 auto;min-width:82px;padding:10px 5px;text-align:center;background:#edf4fb;color:#0b4f91;border-radius:11px;font-size:28px;font-weight:800}
-.event-main{flex:1;min-width:0}.event-title{font-size:27px;line-height:1.35;font-weight:800}
-.event-place{margin-top:8px;font-size:20px;line-height:1.45;color:#46556b}.event-people{margin-top:5px;font-size:18px;color:#5f6d7e}
-.event-note{margin-top:8px;padding:9px 11px;background:#fff8e5;border-radius:9px;color:#8a6200;font-size:16px}
-.status{display:inline-block;margin-top:9px;padding:5px 10px;border-radius:20px;font-size:13px;font-weight:700;background:#e9f6ed;color:#28753a}.status.changed{background:#fdeaea;color:#b71c1c}
-.file-link{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:8px 11px;border-radius:9px;background:#eef5ff;color:#0b4f91;text-decoration:none;font-size:15px;font-weight:700}
-.file-link:hover{text-decoration:underline}.upload-link{display:inline-flex;align-items:center;gap:7px;margin-top:8px;margin-left:6px;padding:8px 11px;border-radius:9px;background:#fff4d6;color:#8a6500;text-decoration:none;font-size:15px;font-weight:700}.upload-link:hover{text-decoration:underline}
-.week-block{margin-bottom:28px}.week-block-title{display:flex;align-items:baseline;gap:9px;margin-bottom:12px}
-.week-block-title strong{font-size:24px;color:#0b2d5c}.week-block-title span{font-size:15px;color:#687789;font-weight:600}
-.week-day{margin-bottom:18px}.week-day-header{display:flex;align-items:center;gap:10px;margin-bottom:9px}
-.week-date-box{width:58px;min-width:58px;height:58px;background:#0b2d5c;color:#fff;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.week-date-number{font-size:24px;font-weight:800}.week-date-month{font-size:11px}.week-date-lunar{font-size:10px;color:#b7d2ef;margin-top:2px}.today-lunar{font-size:14px;font-weight:600;opacity:.9}.week-day-name{font-size:23px;font-weight:800;color:#0b2d5c}
-.week-today-label{margin-left:auto;background:#d4a72c;color:#fff;padding:5px 9px;border-radius:7px;font-size:12px;font-weight:800}
-.week-event{background:#fff;border-radius:14px;margin-bottom:8px;padding:14px 12px;display:flex;gap:10px;box-shadow:0 3px 11px #0001;border-left:4px solid #0b4f91}
-.week-time{flex:0 0 72px;font-size:22px;font-weight:800;color:#0b4f91}.week-content{flex:1;min-width:0}
-.week-title{font-size:23px;line-height:1.4;font-weight:700}.week-place{margin-top:5px;font-size:19px;color:#5b6878}.week-note{margin-top:5px;color:#9a6a00;font-size:16px}
-.footer{text-align:center;padding:15px 10px 30px;color:#7b8794;font-size:13px}
-@media(max-width:430px){
-  .header-title{font-size:26px}.event-title{font-size:25px}.event-place{font-size:19px}.time-box{min-width:76px;font-size:26px}
-  .week-title{font-size:21px}.week-place{font-size:18px}.week-block-title strong{font-size:22px}
+:root{
+  --navy:#0b2d5c;
+  --blue:#0b4f91;
+  --blue-soft:#e9f3ff;
+  --gold:#d6a72b;
+  --gold-soft:#fff5d9;
+  --text:#172033;
+  --muted:#687789;
+  --line:#e4eaf1;
+  --bg:#f5f7fa;
+  --white:#fff;
+  --red:#c62828;
 }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Be Vietnam Pro",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,a{font:inherit}
+.topbar{background:var(--navy);color:#fff;padding:18px 18px 17px;box-shadow:0 3px 14px #0002}
+.topbar-inner{max-width:720px;margin:auto;display:flex;align-items:center;gap:12px}
+.calendar-mark{width:43px;height:43px;border:2px solid #fff;border-radius:11px;position:relative;flex:none}
+.calendar-mark:before,.calendar-mark:after{content:"";position:absolute;top:-5px;width:7px;height:11px;background:#fff;border-radius:5px}
+.calendar-mark:before{left:8px}.calendar-mark:after{right:8px}
+.calendar-grid{position:absolute;left:8px;right:8px;top:15px;bottom:7px;background:linear-gradient(90deg,#fff 0 3px,transparent 3px 7px,#fff 7px 10px,transparent 10px 14px,#fff 14px 17px),linear-gradient(#fff 0 3px,transparent 3px 7px,#fff 7px 10px,transparent 10px 14px,#fff 14px 17px);opacity:.9}
+.brand{min-width:0}.brand-title{font-size:22px;line-height:1.1;font-weight:800;letter-spacing:.2px}.brand-sub{margin-top:4px;font-size:11px;color:#dce9f7}
+.container{max-width:720px;margin:auto;padding:12px 12px 34px}
+.loading{padding:75px 20px;text-align:center}.spinner{width:40px;height:40px;margin:auto;border:4px solid #dce5ef;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}.loading-text{margin-top:14px;color:var(--muted);font-weight:600}@keyframes spin{to{transform:rotate(360deg)}}
+.error{display:none;background:#fff;border-left:5px solid var(--red);border-radius:14px;padding:20px;margin-top:20px;box-shadow:0 4px 16px #0001;text-align:center}.error strong{display:block;color:#a91f1f;font-size:18px}.error p{color:var(--muted);font-size:14px}.reload{border:0;background:var(--navy);color:#fff;border-radius:10px;padding:10px 16px;font-weight:700}
+.section{margin-top:16px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}.section-title{display:flex;align-items:center;gap:8px;color:var(--navy);font-size:19px;font-weight:800;text-transform:uppercase;letter-spacing:.15px}.section-title:before{content:"";width:4px;height:20px;border-radius:5px;background:var(--gold)}
+.today-date{background:linear-gradient(90deg,#f7fbff,#fffdf7);border-radius:13px;padding:10px 12px;margin-bottom:10px;box-shadow:0 2px 10px #0000000a;border:1px solid #e5ebf2}.today-main{font-size:16px;font-weight:800;color:var(--navy)}.today-lunar{margin-top:2px;color:#7b8794;font-size:12px;font-weight:600}
+.event{background:var(--white);border-radius:15px;margin-bottom:10px;padding:12px 11px;display:grid;grid-template-columns:68px minmax(0,1fr);gap:11px;box-shadow:0 3px 13px #0000000d;border-left:4px solid var(--blue)}
+.event.changed{border-left-color:var(--red)}
+.event-time{font-size:21px;line-height:1.1;font-weight:800;color:var(--blue);min-height:58px;padding:8px 4px;background:var(--blue-soft);border:1px solid #dbe9f7;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;align-self:start}.event-time:after{content:"";position:absolute;right:-7px;top:9px;width:7px;height:7px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 4px #fff}
+.event-content{min-width:0}.event-title{font-size:16px;line-height:1.38;font-weight:800;color:#172b48}.event-meta{margin-top:6px;color:#526174;font-size:13px;line-height:1.45}.event-meta div{margin-top:4px}.event-note{margin-top:7px;background:var(--gold-soft);color:#896500;border-radius:8px;padding:7px 9px;font-size:12px;font-weight:600}.status{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:999px;background:#eaf6ee;color:#28753a;font-size:11px;font-weight:800}.status.changed{background:#fdeaea;color:#b71c1c}
+.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.action{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;border-radius:9px;padding:7px 10px;font-size:12px;font-weight:800;line-height:1.1}.file{background:#edf5ff;color:var(--blue)}.prep{background:var(--gold-soft);color:#8a6500}
+.week-box{margin-top:24px}.week-head{display:flex;align-items:baseline;gap:9px;margin-bottom:9px}.week-title{font-size:22px;font-weight:800;color:var(--navy);text-transform:uppercase}.week-range{font-size:13px;color:var(--muted);font-weight:600}.day-row{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:8px;overflow:hidden;box-shadow:0 2px 9px #00000008}.day-row.today{border-color:#b9d5f2;box-shadow:0 3px 12px #0b4f9112}.day-summary{display:grid;grid-template-columns:63px minmax(0,1fr) 20px;align-items:center;gap:10px;padding:11px 12px;cursor:pointer}.day-date{font-weight:800;color:var(--blue);font-size:17px;line-height:1.05}.day-date small{display:block;margin-top:3px;color:var(--muted);font-size:10px;font-weight:600}.day-info{min-width:0}.day-name{font-size:14px;font-weight:800;color:#25364d}.day-meta{margin-top:3px;color:var(--muted);font-size:12px}.day-today{display:inline-block;margin-left:5px;padding:3px 6px;background:var(--gold);color:#fff;border-radius:6px;font-size:9px;font-weight:800}.chevron{color:#8190a2;font-size:18px;text-align:center;transition:transform .2s}.day-row.open .chevron{transform:rotate(90deg)}.day-details{display:none;padding:0 10px 10px;border-top:1px solid #edf1f5}.day-row.open .day-details{display:block}.day-details .event{margin:9px 0 0;box-shadow:none;background:#f9fbfd}
+.empty-day{padding:11px 3px 4px;color:#9aa5b1;font-size:12px}.footer{text-align:center;color:#8995a4;font-size:11px;padding:12px 10px 0}
+@media(min-width:600px){.topbar{padding-left:24px;padding-right:24px}.brand-title{font-size:24px}.container{padding-left:18px;padding-right:18px}.event-title{font-size:18px}.event-meta{font-size:14px}}
 </style>
-
 </head>
 <body>
-<header class="header">
-  <div class="header-title">LỊCH CÔNG TÁC</div>
-  <div class="header-subtitle">Lịch điều hành của Lãnh đạo</div>
-</header>
-
+<header class="topbar"><div class="topbar-inner"><div class="calendar-mark"><div class="calendar-grid"></div></div><div class="brand"><div class="brand-title">LỊCH CÔNG TÁC</div><div class="brand-sub">Lịch điều hành của Lãnh đạo</div></div></div></header>
 <main class="container">
-  <div id="loading" class="loading">
-    <div class="spinner"></div>
-    <div class="loading-text">Đang tải lịch công tác...</div>
-  </div>
-
-  <div id="errorBox" class="error-box">
-    <div class="error-title">Không tải được lịch</div>
-    <div class="error-text">Kết nối tới dữ liệu lịch công tác bị gián đoạn.</div>
-    <button class="reload-btn" onclick="loadSchedule()">↻ Tải lại lịch</button>
-  </div>
-
+  <div id="loading" class="loading"><div class="spinner"></div><div class="loading-text">Đang tải lịch công tác...</div></div>
+  <div id="error" class="error"><strong>Không tải được lịch</strong><p>Kết nối tới dữ liệu lịch công tác bị gián đoạn.</p><button class="reload" onclick="loadSchedule()">↻ Tải lại lịch</button></div>
   <div id="content" style="display:none">
     <section class="section">
-      <div class="section-title">Hôm nay</div>
+      <div class="section-head"><div class="section-title">Hôm nay</div></div>
       <div id="todayDate"></div>
       <div id="todayEvents"></div>
     </section>
-
-    <section class="section">
-      
-      <div id="twoWeekEvents"></div>
-    </section>
+    <section class="week-box"><div class="week-head"><div class="week-title">Tuần này</div><div id="weekRange" class="week-range"></div></div><div id="weekCurrent"></div></section>
+    <section class="week-box"><div class="week-head"><div class="week-title">Tuần sau</div><div id="nextRange" class="week-range"></div></div><div id="weekNext"></div></section>
   </div>
+  <div class="footer">Dữ liệu lịch được cập nhật tự động từ Google Sheet</div>
 </main>
-
-<div class="footer">Lịch công tác được cập nhật từ hệ thống điều hành</div>
-
 <script>
 const API_URL="https://script.google.com/macros/s/AKfycbwnLLNPn7Vsxoqs9gOi0UH_iMtC_2it12QlHeBfUVyhiOalsnqyu9ga2u4OIVKN9WtJww/exec";
-let scheduleData=[],callbackName=null,timeoutId=null;
-
+let scheduleData=[],cbName="",timer=null;
 document.addEventListener("DOMContentLoaded",loadSchedule);
-
 function loadSchedule(){
-  showLoading(); cleanup();
-  callbackName="scheduleCallback_"+Date.now();
-  window[callbackName]=function(data){
-    clearTimeout(timeoutId);
-    scheduleData=Array.isArray(data)?data:[];
-    renderAll();
-    document.getElementById("loading").style.display="none";
-    document.getElementById("content").style.display="block";
-    cleanup();
-  };
-  let s=document.createElement("script");
-  s.id="scheduleJsonp";
-  s.src=API_URL+"?callback="+encodeURIComponent(callbackName)+"&t="+Date.now();
-  s.onerror=showError;
-  document.body.appendChild(s);
-  timeoutId=setTimeout(showError,10000);
+  document.getElementById('loading').style.display='block';document.getElementById('error').style.display='none';document.getElementById('content').style.display='none';
+  if(document.getElementById('scheduleJsonp'))document.getElementById('scheduleJsonp').remove();
+  cbName='scheduleCallback_'+Date.now();
+  window[cbName]=function(data){clearTimeout(timer);scheduleData=Array.isArray(data)?data:[];render();document.getElementById('loading').style.display='none';document.getElementById('content').style.display='block';cleanup()};
+  const s=document.createElement('script');s.id='scheduleJsonp';s.src=API_URL+'?callback='+encodeURIComponent(cbName)+'&t='+Date.now();s.onerror=showError;document.body.appendChild(s);timer=setTimeout(showError,10000);
 }
+function cleanup(){const s=document.getElementById('scheduleJsonp');if(s)s.remove();if(cbName){try{delete window[cbName]}catch(e){}}}
+function showError(){clearTimeout(timer);cleanup();document.getElementById('loading').style.display='none';document.getElementById('error').style.display='block'}
+function INT(x){return Math.floor(x)}
+function jdFromDate(dd,mm,yy){let a=INT((14-mm)/12),y=yy+4800-a,m=mm+12*a-3,j=dd+INT((153*m+2)/5)+365*y+INT(y/4)-INT(y/100)+INT(y/400)-32045;if(j<2299161)j=dd+INT((153*m+2)/5)+365*y+INT(y/4)-32083;return j}
+function NewMoon(k){const T=k/1236.85,T2=T*T,T3=T2*T,dr=Math.PI/180;let J=2415020.75933+29.53058868*k+0.0001178*T2-0.000000155*T3;J+=0.00033*Math.sin((166.56+132.87*T-0.009173*T2)*dr);const M=359.2242+29.10535608*k-0.0000333*T2-0.00000347*T3,Mp=306.0253+385.81691806*k+0.0107306*T2+0.00001236*T3,F=21.2964+390.67050646*k-0.0016528*T2-0.00000239*T3;let C=(0.1734-0.000393*T)*Math.sin(M*dr)+0.0021*Math.sin(2*M*dr)-0.4068*Math.sin(Mp*dr)-0.0161*Math.sin(2*Mp*dr)-0.0004*Math.sin(3*Mp*dr)+0.0104*Math.sin(2*F*dr)-0.0051*Math.sin((M+Mp)*dr)-0.0074*Math.sin((M-Mp)*dr)+0.0004*Math.sin((2*F+M)*dr)-0.0004*Math.sin((2*F-M)*dr)-0.0006*Math.sin((2*F+Mp)*dr)+0.001*Math.sin((2*F-Mp)*dr)+0.0005*Math.sin((2*Mp+M)*dr);let dt=T<-11?0.001+0.000839*T+0.0002261*T2-0.00000845*T3-0.000000081*T*T3:-0.000278+0.000265*T+0.000262*T2;return J+C-dt}
+function SunLongitude(j){const T=(j-2451545)/36525,T2=T*T,dr=Math.PI/180,M=357.5291+35999.0503*T-0.0001559*T2-0.00000048*T*T2,L0=280.46645+36000.76983*T+0.0003032*T2;let DL=(1.9146-0.004817*T-0.000014*T2)*Math.sin(M*dr)+(0.019993-0.000101*T)*Math.sin(2*M*dr)+0.00029*Math.sin(3*M*dr);let L=(L0+DL)*dr;L=L-Math.PI*2*INT(L/(Math.PI*2));return INT(L/dr/30)}
+function getNewMoonDay(k,tz){return INT(NewMoon(k)+0.5+tz/24)}
+function getSunLongitude(day,tz){return INT(SunLongitude(day-0.5-tz/24))}
+function getLunarMonth11(y,tz){const off=jdFromDate(31,12,y)-2415021,k=INT(off/29.530588853);let nm=getNewMoonDay(k,tz);if(getSunLongitude(nm,tz)>=9)nm=getNewMoonDay(k-1,tz);return nm}
+function getLeapMonthOffset(a11,tz){const k=INT(0.5+(a11-2415021.076998695)/29.530588853);let last=0,i=1,arc=getSunLongitude(getNewMoonDay(k+i,tz),tz);do{last=arc;i++;arc=getSunLongitude(getNewMoonDay(k+i,tz),tz)}while(arc!==last&&i<15);return i-1}
+function convertSolar2Lunar(dd,mm,yy,tz){const day=jdFromDate(dd,mm,yy),k=INT((day-2415021.076998695)/29.530588853);let ms=getNewMoonDay(k+1,tz);if(ms>day)ms=getNewMoonDay(k,tz);let a11=getLunarMonth11(yy,tz),b11=a11,ly=yy;if(a11>=ms){a11=getLunarMonth11(yy-1,tz)}else{b11=getLunarMonth11(yy+1,tz);ly=yy+1}const ld=day-ms+1,diff=INT((ms-a11)/29),leap=(b11-a11>365),leapDiff=leap?getLeapMonthOffset(a11,tz):0;let lm=diff+11,ll=false;if(leap&&diff>=leapDiff){lm=diff+10;if(diff===leapDiff)ll=true}if(lm>12)lm-=12;if(lm>=11&&diff<4)ly-=1;return[ld,lm,ly,ll]}
+function lunarText(d){try{const l=convertSolar2Lunar(d.getDate(),d.getMonth()+1,d.getFullYear(),7);return String(l[0]).padStart(2,'0')+'/'+String(l[1]).padStart(2,'0')+(l[3]?' nhuận':'')+' ÂL'}catch(e){return ''}}
+function parseDate(v){if(!v)return null;let t=String(v).trim(),p=t.split('/');if(p.length===3){let y=+p[2],m=+p[1]-1,d=+p[0];if(y<100)y+=2000;return new Date(y,m,d)}p=t.split('-');if(p.length===3)return new Date(+p[0],+p[1]-1,+p[2]);let d=new Date(t);return isNaN(d)?null:d}
+function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function fmt(d){return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()}
+function dname(d){return['Chủ nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'][d.getDay()]}
+function timeVal(v){const m=String(v||'').match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);return m?+m[1]*60+ +m[2]:99999}
+function esc(v){return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
+function changed(x){const s=String(x.status||'').toLowerCase(),n=String(x.note||'').toLowerCase();return s.includes('thay đổi')||s.includes('thay doi')||n.includes('đổi')||n.includes('doi')}
+function url(v){const u=String(v||'').trim();return /^https?:\/\//i.test(u)?u:''}
+function attachment(x){const u=url(x.file);return u?'<a class="action file" href="'+esc(u)+'" target="_blank" rel="noopener">📎 Tài liệu</a>':''}
+function prepLink(x){const u=url(x.prep);return u?'<a class="action prep" href="'+esc(u)+'" target="_blank" rel="noopener">📑 Chuẩn bị</a>':''}
 
-function cleanup(){
-  let s=document.getElementById("scheduleJsonp");
-  if(s)s.remove();
-  if(callbackName){try{delete window[callbackName]}catch(e){}}
-}
-
-function showLoading(){
-  document.getElementById("loading").style.display="block";
-  document.getElementById("errorBox").style.display="none";
-  document.getElementById("content").style.display="none";
-}
-
-function showError(){
-  clearTimeout(timeoutId);
-  document.getElementById("loading").style.display="none";
-  document.getElementById("errorBox").style.display="block";
-  document.getElementById("content").style.display="none";
-  cleanup();
-}
-
-function INT(d){
-  return Math.floor(d);
-}
-
-function jdFromDate(dd,mm,yy){
-  let a=INT((14-mm)/12);
-  let y=yy+4800-a;
-  let m=mm+12*a-3;
-  let jd=dd+INT((153*m+2)/5)+365*y+INT(y/4)-INT(y/100)+INT(y/400)-32045;
-  if(jd<2299161){
-    jd=dd+INT((153*m+2)/5)+365*y+INT(y/4)-32083;
-  }
-  return jd;
-}
-
-function jdToDate(jd){
-  let a,b,c,d,e,m;
-  if(jd>2299160){
-    a=jd+32044;
-    b=INT((4*a+3)/146097);
-    c=a-INT((b*146097)/4);
-  }else{
-    b=0;
-    c=jd+32082;
-  }
-  d=INT((4*c+3)/1461);
-  e=c-INT((1461*d)/4);
-  m=INT((5*e+2)/153);
-  return [
-    e-INT((153*m+2)/5)+1,
-    m+3-12*INT(m/10),
-    b*100+ d-4800+INT(m/10)
-  ];
-}
-
-function NewMoon(k){
-  const T=k/1236.85;
-  const T2=T*T;
-  const T3=T2*T;
-  const dr=Math.PI/180;
-  let Jd1=2415020.75933+29.53058868*k+0.0001178*T2-0.000000155*T3;
-  Jd1+=0.00033*Math.sin((166.56+132.87*T-0.009173*T2)*dr);
-  const M=359.2242+29.10535608*k-0.0000333*T2-0.00000347*T3;
-  const Mpr=306.0253+385.81691806*k+0.0107306*T2+0.00001236*T3;
-  const F=21.2964+390.67050646*k-0.0016528*T2-0.00000239*T3;
-  let C1=(0.1734-0.000393*T)*Math.sin(M*dr)+0.0021*Math.sin(2*M*dr);
-  C1-=0.4068*Math.sin(Mpr*dr)+0.0161*Math.sin(2*Mpr*dr);
-  C1-=0.0004*Math.sin(3*Mpr*dr);
-  C1+=0.0104*Math.sin(2*F*dr)-0.0051*Math.sin((M+Mpr)*dr);
-  C1-=0.0074*Math.sin((M-Mpr)*dr)+0.0004*Math.sin((2*F+M)*dr);
-  C1-=0.0004*Math.sin((2*F-M)*dr)-0.0006*Math.sin((2*F+Mpr)*dr);
-  C1+=0.0010*Math.sin((2*F-Mpr)*dr)+0.0005*Math.sin((2*Mpr+M)*dr);
-  let deltat;
-  if(T<-11){
-    deltat=0.001+0.000839*T+0.0002261*T2-0.00000845*T3-0.000000081*T*T3;
-  }else{
-    deltat=-0.000278+0.000265*T+0.000262*T2;
-  }
-  return Jd1+C1-deltat;
-}
-
-function SunLongitude(jdn){
-  const T=(jdn-2451545.0)/36525;
-  const T2=T*T;
-  const dr=Math.PI/180;
-  const M=357.52910+35999.05030*T-0.0001559*T2-0.00000048*T*T2;
-  const L0=280.46645+36000.76983*T+0.0003032*T2;
-  let DL=(1.914600-0.004817*T-0.000014*T2)*Math.sin(M*dr);
-  DL+=(0.019993-0.000101*T)*Math.sin(2*M*dr)+0.000290*Math.sin(3*M*dr);
-  let L=L0+DL;
-  L=L*dr;
-  L=L-Math.PI*2*INT(L/(Math.PI*2));
-  return INT(L/dr/30);
-}
-
-function getNewMoonDay(k,timeZone){
-  return INT(NewMoon(k)+0.5+timeZone/24);
-}
-
-function getSunLongitude(day,timeZone){
-  return INT(SunLongitude(day-0.5-timeZone/24));
-}
-
-function getLunarMonth11(yy,timeZone){
-  const off=jdFromDate(31,12,yy)-2415021;
-  const k=INT(off/29.530588853);
-  let nm=getNewMoonDay(k,timeZone);
-  const sunLong=getSunLongitude(nm,timeZone);
-  if(sunLong>=9){
-    nm=getNewMoonDay(k-1,timeZone);
-  }
-  return nm;
-}
-
-function getLeapMonthOffset(a11,timeZone){
-  const k=INT(0.5+(a11-2415021.076998695)/29.530588853);
-  let last=0;
-  let i=1;
-  let arc=getSunLongitude(getNewMoonDay(k+i,timeZone),timeZone);
-  do{
-    last=arc;
-    i++;
-    arc=getSunLongitude(getNewMoonDay(k+i,timeZone),timeZone);
-  }while(arc!==last && i<15);
-  return i-1;
-}
-
-function convertSolar2Lunar(dd,mm,yy,timeZone){
-  const dayNumber=jdFromDate(dd,mm,yy);
-  const k=INT((dayNumber-2415021.076998695)/29.530588853);
-  let monthStart=getNewMoonDay(k+1,timeZone);
-  if(monthStart>dayNumber){
-    monthStart=getNewMoonDay(k,timeZone);
-  }
-  let a11=getLunarMonth11(yy,timeZone);
-  let b11=a11;
-  let lunarYear=yy;
-  if(a11>=monthStart){
-    a11=getLunarMonth11(yy-1,timeZone);
-    lunarYear=yy;
-  }else{
-    b11=getLunarMonth11(yy+1,timeZone);
-    lunarYear=yy+1;
-  }
-  const lunarDay=dayNumber-monthStart+1;
-  const diff=INT((monthStart-a11)/29);
-  let lunarLeap=false;
-  let lunarMonth=diff+11;
-  if(b11-a11>365){
-    const leapDiff=getLeapMonthOffset(a11,timeZone);
-    if(diff>=leapDiff){
-      lunarMonth=diff+10;
-      if(diff===leapDiff){
-        lunarLeap=true;
-      }
-    }
-  }
-  if(lunarMonth>12) lunarMonth-=12;
-  if(lunarMonth>=11 && diff<4) lunarYear-=1;
-  return [lunarDay,lunarMonth,lunarYear,lunarLeap];
-}
-
-function getLunarDate(d){
-  try{
-    return convertSolar2Lunar(
-      d.getDate(),
-      d.getMonth()+1,
-      d.getFullYear(),
-      7
-    );
-  }catch(e){
-    return null;
-  }
-}
-
-function lunarText(d){
-  const l=getLunarDate(d);
-  if(!l)return '';
-  return String(l[0]).padStart(2,'0')+'/'+String(l[1]).padStart(2,'0')+(l[3]?' nhuận':'')+' ÂL';
-}
-
-function parseDate(v){
-  if(!v)return null;
-  let t=String(v).trim(),p=t.split("/");
-  if(p.length===3){
-    let y=+p[2],m=+p[1]-1,d=+p[0];
-    if(y<100)y+=2000;
-    return new Date(y,m,d);
-  }
-  p=t.split("-");
-  if(p.length===3)return new Date(+p[0],+p[1]-1,+p[2]);
-  let d=new Date(t);
-  return isNaN(d)?null:d;
-}
-
-function dateKey(d){
-  return d?d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"):"";
-}
-function formatDate(d){return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear()}
-function dayName(d){return["Chủ nhật","Thứ Hai","Thứ Ba","Thứ Tư","Thứ Năm","Thứ Sáu","Thứ Bảy"][d.getDay()]}
-function parseTime(v){let m=String(v||"").match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);return m?+m[1]*60+ +m[2]:99999}
-function changed(x){
-  let s=String(x.status||"").toLowerCase(),n=String(x.note||"").toLowerCase();
-  return s.includes("thay đổi")||s.includes("thay doi")||n.includes("đổi")||n.includes("doi");
-}
-function esc(v){
-  return String(v||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-}
-function safeUrl(v){
-  let u=String(v||"").trim();
-  return /^https?:\/\//i.test(u)?u:"";
-}
-function attachmentHtml(x){
-  let url=safeUrl(x.file);
-  if(!url)return "";
-  return '<a class="file-link" href="'+esc(url)+'" target="_blank" rel="noopener">📎 Xem tệp đính kèm</a>';
-}
-
-function uploadHtml(x){
-  let qs='?upload=1&row='+encodeURIComponent(x.row||'')+'&date='+encodeURIComponent(x.date||'')+'&time='+encodeURIComponent(x.time||'')+'&title='+encodeURIComponent(x.title||'');
-  let url=API_URL+qs;
-  return '<a class="upload-link" href="'+esc(url)+'" target="_blank" rel="noopener">⬆️ Tải tệp lên</a>';
-}
-
-function renderAll(){renderToday();renderTwoWeeks()}
-
-function renderToday(){
-  let n=new Date(),k=dateKey(n);
-  let e=scheduleData.filter(x=>{
-    let d=parseDate(x.date);
-    return d&&dateKey(d)===k;
-  }).sort((a,b)=>parseTime(a.time)-parseTime(b.time));
-
-  document.getElementById("todayDate").innerHTML=
-    '<div class="today-date">'+
-      '<span>'+dayName(n)+' • '+formatDate(n)+'</span>'+      '<span class="today-lunar">'+lunarText(n)+'</span>'+    '</div>';
-
-  document.getElementById("todayEvents").innerHTML=
-    e.length?e.map(todayEvent).join(""):'<div class="today-empty">Hôm nay không có lịch công tác.</div>';
-}
-
-function todayEvent(x){
-  let c=changed(x);
-  let h='<div class="event-card '+(c?"changed":"")+'"><div class="event-top"><div class="time-box">'+esc(x.time)+'</div><div class="event-main"><div class="event-title">'+esc(x.title)+'</div>';
-  if(x.place)h+='<div class="event-place">📍 '+esc(x.place)+'</div>';
-  if(x.people)h+='<div class="event-people">👥 '+esc(x.people)+'</div>';
-  if(x.note)h+='<div class="event-note">📝 '+esc(x.note)+'</div>';
-  if(x.status)h+='<div class="status '+(c?"changed":"")+'">'+esc(x.status)+'</div>';
-  h+=attachmentHtml(x);
-  h+=uploadHtml(x);
-  return h+"</div></div></div>";
-}
-
-function monday(d){
-  let x=new Date(d),n=x.getDay();
-  x.setDate(x.getDate()+(n===0?-6:1-n));
-  x.setHours(0,0,0,0);
-  return x;
-}
-
-function renderTwoWeeks(){
-  let first=monday(new Date()), second=new Date(first);
-  second.setDate(first.getDate()+7);
-
-  let h='<div class="week-block">'+
-    '<div class="week-block-title"><strong>Tuần này</strong><span>'+formatDate(first)+' – '+formatDate(addDays(first,6))+'</span></div>';
-
-  for(let i=0;i<7;i++){
-    let d=addDays(first,i);
-    h+=weekDay(d);
-  }
-  h+='</div>';
-
-  h+='<div class="week-block">'+
-    '<div class="week-block-title"><strong>Tuần sau</strong><span>'+formatDate(second)+' – '+formatDate(addDays(second,6))+'</span></div>';
-
-  for(let i=0;i<7;i++){
-    let d=addDays(second,i);
-    h+=weekDay(d);
-  }
-  h+='</div>';
-
-  document.getElementById("twoWeekEvents").innerHTML=h;
-}
-
-function addDays(d,n){
-  let x=new Date(d);
-  x.setDate(x.getDate()+n);
-  return x;
-}
-
-function weekDay(d){
-  let k=dateKey(d),tk=dateKey(new Date());
-  let e=scheduleData.filter(x=>{
-    let z=parseDate(x.date);
-    return z&&dateKey(z)===k;
-  }).sort((a,b)=>parseTime(a.time)-parseTime(b.time));
-
-  let h='<div class="week-day"><div class="week-day-header">'+
-    '<div class="week-date-box"><div class="week-date-number">'+d.getDate()+
-    '</div><div class="week-date-month">THG '+(d.getMonth()+1)+'</div>'+          '<div class="week-date-lunar">'+lunarText(d)+'</div></div>'+
-    '<div class="week-day-name">'+dayName(d)+'</div>';
-
-  if(k===tk)h+='<div class="week-today-label">HÔM NAY</div>';
-  h+='</div>';
-
-  h+=e.length?e.map(weekEvent).join(""):'<div style="color:#9aa5b1;font-size:15px;padding:5px">Không có lịch</div>';
-  return h+"</div>";
-}
-
-function weekEvent(x){
-  let c=changed(x);
-  let h='<div class="week-event '+(c?"changed":"")+'"><div class="week-time">'+esc(x.time)+'</div><div class="week-content"><div class="week-title">'+esc(x.title)+'</div>';
-  if(x.place)h+='<div class="week-place">📍 '+esc(x.place)+'</div>';
-  if(x.note)h+='<div class="week-note">📝 '+esc(x.note)+'</div>';
-  if(x.file)h+=attachmentHtml(x);
-  h+=uploadHtml(x);
-  return h+"</div></div>";
+function sortedEvents(d){const k=key(d);return scheduleData.filter(x=>{const z=parseDate(x.date);return z&&key(z)===k}).sort((a,b)=>timeVal(a.time)-timeVal(b.time))}
+function eventHtml(x){const c=changed(x);let h='<article class="event '+(c?'changed':'')+'"><div class="event-time">'+esc(x.time)+'</div><div class="event-content"><div class="event-title">'+esc(x.title)+'</div>';if(x.place)h+='<div class="event-meta"><div>📍 '+esc(x.place)+'</div>';if(x.people)h+='<div>👥 '+esc(x.people)+'</div>';h+='</div>';if(x.note)h+='<div class="event-note">📝 '+esc(x.note)+'</div>';if(x.status)h+='<span class="status '+(c?'changed':'')+'">'+esc(x.status)+'</span>';h+='<div class="actions">'+attachment(x)+prepLink(x)+'</div></div></article>';return h}
+function monday(d){const x=new Date(d);const n=x.getDay();x.setDate(x.getDate()+(n===0?-6:1-n));x.setHours(0,0,0,0);return x}
+function add(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
+function dayRow(d,open){const ev=sortedEvents(d),today=key(d)===key(new Date());let h='<div class="day-row '+(today?'today ':'')+(open?'open':'')+'"><div class="day-summary" onclick="toggleDay(this)"><div class="day-date">'+String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'<small>'+lunarText(d)+'</small></div><div class="day-info"><div class="day-name">'+dname(d)+(today?'<span class="day-today">HÔM NAY</span>':'')+'</div><div class="day-meta">'+(ev.length?ev.length+' lịch công tác':'Không có lịch')+'</div></div><div class="chevron">›</div></div><div class="day-details">'+(ev.length?ev.map(eventHtml).join(''):'<div class="empty-day">Chưa có lịch công tác.</div>')+'</div></div>';return h}
+function toggleDay(el){el.parentElement.classList.toggle('open')}
+function render(){
+  const now=new Date(),todayEvents=sortedEvents(now);
+  document.getElementById('todayDate').innerHTML='<div class="today-date"><div class="today-main">'+dname(now)+' · '+fmt(now)+'</div><div class="today-lunar">'+lunarText(now)+'</div></div>';
+  document.getElementById('todayEvents').innerHTML=todayEvents.length?todayEvents.map(eventHtml).join(''):'<div class="today-date" style="text-align:center;color:#7b8794">Hôm nay không có lịch công tác.</div>';
+  const m=monday(now),n=add(m,7);document.getElementById('weekRange').textContent=fmt(m)+' – '+fmt(add(m,6));document.getElementById('nextRange').textContent=fmt(n)+' – '+fmt(add(n,6));
+  document.getElementById('weekCurrent').innerHTML=Array.from({length:7},(_,i)=>dayRow(add(m,i),i===now.getDay()-1|| (now.getDay()===0&&i===6))).join('');
+  document.getElementById('weekNext').innerHTML=Array.from({length:7},(_,i)=>dayRow(add(n,i),false)).join('');
 }
 </script>
 </body>
