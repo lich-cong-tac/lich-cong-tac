@@ -9,37 +9,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#0b2d5c;
-  --blue:#0b4f91;
-  --blue-soft:#e9f3ff;
-  --gold:#d6a72b;
-  --gold-soft:#fff5d9;
-  --text:#172033;
-  --muted:#687789;
-  --line:#e4eaf1;
-  --bg:#f5f7fa;
-  --white:#fff;
-  --red:#c62828;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+:root{--navy:#0b2d5c;--blue:#0b4f91;--blue-soft:#e9f3ff;--gold:#d6a72b;--gold-soft:#fff5d9;--text:#172033;--muted:#687789;--line:#e4eaf1;--bg:#f5f7fa;--white:#fff;--red:#c62828}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--text);font-family:"Be Vietnam Pro",Arial,sans-serif;-webkit-font-smoothing:antialiased}
-button,a{font:inherit}
-.topbar{background:var(--navy);color:#fff;padding:18px 18px 17px;box-shadow:0 3px 14px #0002}
-.topbar-inner{max-width:720px;margin:auto;display:flex;align-items:center;gap:12px}
-.calendar-mark{width:43px;height:43px;border:2px solid #fff;border-radius:11px;position:relative;flex:none}
-.calendar-mark:before,.calendar-mark:after{content:"";position:absolute;top:-5px;width:7px;height:11px;background:#fff;border-radius:5px}
-.calendar-mark:before{left:8px}.calendar-mark:after{right:8px}
+button,a{font:inherit}.topbar{background:var(--navy);color:#fff;padding:18px 18px 17px;box-shadow:0 3px 14px #0002}
+.topbar-inner{max-width:720px;margin:auto;display:flex;align-items:center;gap:12px}.calendar-mark{width:43px;height:43px;border:2px solid #fff;border-radius:11px;position:relative;flex:none}
+.calendar-mark:before,.calendar-mark:after{content:"";position:absolute;top:-5px;width:7px;height:11px;background:#fff;border-radius:5px}.calendar-mark:before{left:8px}.calendar-mark:after{right:8px}
 .calendar-grid{position:absolute;left:8px;right:8px;top:15px;bottom:7px;background:linear-gradient(90deg,#fff 0 3px,transparent 3px 7px,#fff 7px 10px,transparent 10px 14px,#fff 14px 17px),linear-gradient(#fff 0 3px,transparent 3px 7px,#fff 7px 10px,transparent 10px 14px,#fff 14px 17px);opacity:.9}
 .brand{min-width:0}.brand-title{font-size:22px;line-height:1.1;font-weight:800;letter-spacing:.2px}.brand-sub{margin-top:4px;font-size:11px;color:#dce9f7}
-.container{max-width:720px;margin:auto;padding:12px 12px 34px}
-.loading{padding:75px 20px;text-align:center}.spinner{width:40px;height:40px;margin:auto;border:4px solid #dce5ef;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}.loading-text{margin-top:14px;color:var(--muted);font-weight:600}@keyframes spin{to{transform:rotate(360deg)}}
+.container{max-width:720px;margin:auto;padding:12px 12px 34px}.loading{padding:75px 20px;text-align:center}.spinner{width:40px;height:40px;margin:auto;border:4px solid #dce5ef;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}.loading-text{margin-top:14px;color:var(--muted);font-weight:600}@keyframes spin{to{transform:rotate(360deg)}}
 .error{display:none;background:#fff;border-left:5px solid var(--red);border-radius:14px;padding:20px;margin-top:20px;box-shadow:0 4px 16px #0001;text-align:center}.error strong{display:block;color:#a91f1f;font-size:18px}.error p{color:var(--muted);font-size:14px}.reload{border:0;background:var(--navy);color:#fff;border-radius:10px;padding:10px 16px;font-weight:700}
 .section{margin-top:16px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}.section-title{display:flex;align-items:center;gap:8px;color:var(--navy);font-size:19px;font-weight:800;text-transform:uppercase;letter-spacing:.15px}.section-title:before{content:"";width:4px;height:20px;border-radius:5px;background:var(--gold)}
 .today-date{background:linear-gradient(90deg,#f7fbff,#fffdf7);border-radius:13px;padding:10px 12px;margin-bottom:10px;box-shadow:0 2px 10px #0000000a;border:1px solid #e5ebf2}.today-main{font-size:16px;font-weight:800;color:var(--navy)}.today-lunar{margin-top:2px;color:#7b8794;font-size:12px;font-weight:600}
-.event{background:var(--white);border-radius:15px;margin-bottom:10px;padding:12px 11px;display:grid;grid-template-columns:68px minmax(0,1fr);gap:11px;box-shadow:0 3px 13px #0000000d;border-left:4px solid var(--blue)}
-.event.changed{border-left-color:var(--red)}
+.event{background:var(--white);border-radius:15px;margin-bottom:10px;padding:12px 11px;display:grid;grid-template-columns:68px minmax(0,1fr);gap:11px;box-shadow:0 3px 13px #0000000d;border-left:4px solid var(--blue)}.event.changed{border-left-color:var(--red)}
 .event-time{font-size:21px;line-height:1.1;font-weight:800;color:var(--blue);min-height:58px;padding:8px 4px;background:var(--blue-soft);border:1px solid #dbe9f7;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;align-self:start}.event-time:after{content:"";position:absolute;right:-7px;top:9px;width:7px;height:7px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 4px #fff}
 .event-content{min-width:0}.event-title{font-size:16px;line-height:1.38;font-weight:800;color:#172b48}.event-meta{margin-top:6px;color:#526174;font-size:13px;line-height:1.45}.event-meta div{margin-top:4px}.event-note{margin-top:7px;background:var(--gold-soft);color:#896500;border-radius:8px;padding:7px 9px;font-size:12px;font-weight:600}.status{display:inline-block;margin-top:7px;padding:4px 8px;border-radius:999px;background:#eaf6ee;color:#28753a;font-size:11px;font-weight:800}.status.changed{background:#fdeaea;color:#b71c1c}
 .actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.action{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;border-radius:9px;padding:7px 10px;font-size:12px;font-weight:800;line-height:1.1}.file{background:#edf5ff;color:var(--blue)}.prep{background:var(--gold-soft);color:#8a6500}
@@ -51,30 +33,20 @@ button,a{font:inherit}
 <body>
 <header class="topbar"><div class="topbar-inner"><div class="calendar-mark"><div class="calendar-grid"></div></div><div class="brand"><div class="brand-title">LỊCH CÔNG TÁC</div><div class="brand-sub">Lịch điều hành của Lãnh đạo</div></div></div></header>
 <main class="container">
-  <div id="loading" class="loading"><div class="spinner"></div><div class="loading-text">Đang tải lịch công tác...</div></div>
-  <div id="error" class="error"><strong>Không tải được lịch</strong><p>Kết nối tới dữ liệu lịch công tác bị gián đoạn.</p><button class="reload" onclick="loadSchedule()">↻ Tải lại lịch</button></div>
-  <div id="content" style="display:none">
-    <section class="section">
-      <div class="section-head"><div class="section-title">Hôm nay</div></div>
-      <div id="todayDate"></div>
-      <div id="todayEvents"></div>
-    </section>
-    <section class="week-box"><div class="week-head"><div class="week-title">Tuần này</div><div id="weekRange" class="week-range"></div></div><div id="weekCurrent"></div></section>
-    <section class="week-box"><div class="week-head"><div class="week-title">Tuần sau</div><div id="nextRange" class="week-range"></div></div><div id="weekNext"></div></section>
-  </div>
-  <div class="footer">Dữ liệu lịch được cập nhật tự động từ Google Sheet</div>
+<div id="loading" class="loading"><div class="spinner"></div><div class="loading-text">Đang tải lịch công tác...</div></div>
+<div id="error" class="error"><strong>Không tải được lịch</strong><p>Kết nối tới dữ liệu lịch công tác bị gián đoạn.</p><button class="reload" onclick="loadSchedule()">↻ Tải lại lịch</button></div>
+<div id="content" style="display:none">
+<section class="section"><div class="section-head"><div class="section-title">Hôm nay</div></div><div id="todayDate"></div><div id="todayEvents"></div></section>
+<section class="week-box"><div class="week-head"><div class="week-title">Tuần này</div><div id="weekRange" class="week-range"></div></div><div id="weekCurrent"></div></section>
+<section class="week-box"><div class="week-head"><div class="week-title">Tuần sau</div><div id="nextRange" class="week-range"></div></div><div id="weekNext"></div></section>
+</div>
+<div class="footer">Dữ liệu lịch được cập nhật tự động từ Google Sheet</div>
 </main>
 <script>
 const API_URL="https://script.google.com/macros/s/AKfycbwnLLNPn7Vsxoqs9gOi0UH_iMtC_2it12QlHeBfUVyhiOalsnqyu9ga2u4OIVKN9WtJww/exec";
 let scheduleData=[],cbName="",timer=null;
 document.addEventListener("DOMContentLoaded",loadSchedule);
-function loadSchedule(){
-  document.getElementById('loading').style.display='block';document.getElementById('error').style.display='none';document.getElementById('content').style.display='none';
-  if(document.getElementById('scheduleJsonp'))document.getElementById('scheduleJsonp').remove();
-  cbName='scheduleCallback_'+Date.now();
-  window[cbName]=function(data){clearTimeout(timer);scheduleData=Array.isArray(data)?data:[];render();document.getElementById('loading').style.display='none';document.getElementById('content').style.display='block';cleanup()};
-  const s=document.createElement('script');s.id='scheduleJsonp';s.src=API_URL+'?callback='+encodeURIComponent(cbName)+'&t='+Date.now();s.onerror=showError;document.body.appendChild(s);timer=setTimeout(showError,10000);
-}
+function loadSchedule(){document.getElementById('loading').style.display='block';document.getElementById('error').style.display='none';document.getElementById('content').style.display='none';if(document.getElementById('scheduleJsonp'))document.getElementById('scheduleJsonp').remove();cbName='scheduleCallback_'+Date.now();window[cbName]=function(data){clearTimeout(timer);scheduleData=Array.isArray(data)?data:[];render();document.getElementById('loading').style.display='none';document.getElementById('content').style.display='block';cleanup()};const s=document.createElement('script');s.id='scheduleJsonp';s.src=API_URL+'?callback='+encodeURIComponent(cbName)+'&t='+Date.now();s.onerror=showError;document.body.appendChild(s);timer=setTimeout(showError,10000)}
 function cleanup(){const s=document.getElementById('scheduleJsonp');if(s)s.remove();if(cbName){try{delete window[cbName]}catch(e){}}}
 function showError(){clearTimeout(timer);cleanup();document.getElementById('loading').style.display='none';document.getElementById('error').style.display='block'}
 function INT(x){return Math.floor(x)}
@@ -96,22 +68,14 @@ function esc(v){return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 function changed(x){const s=String(x.status||'').toLowerCase(),n=String(x.note||'').toLowerCase();return s.includes('thay đổi')||s.includes('thay doi')||n.includes('đổi')||n.includes('doi')}
 function url(v){const u=String(v||'').trim();return /^https?:\/\//i.test(u)?u:''}
 function attachment(x){const u=url(x.file);return u?'<a class="action file" href="'+esc(u)+'" target="_blank" rel="noopener">📎 Tài liệu</a>':''}
-function prepLink(x){const u=url(x.prep);return u?'<a class="action prep" href="'+esc(u)+'" target="_blank" rel="noopener">📑 Chuẩn bị</a>':'<span class="action prep disabled" title="Chưa có nội dung chuẩn bị">📑 Chuẩn bị</span>'}
-
+function prepLink(x){const u=url(x.prep);return u?'<a class="action prep" href="'+esc(u)+'" target="_blank" rel="noopener">📑 Chuẩn bị</a>':''}
 function sortedEvents(d){const k=key(d);return scheduleData.filter(x=>{const z=parseDate(x.date);return z&&key(z)===k}).sort((a,b)=>timeVal(a.time)-timeVal(b.time))}
-function eventHtml(x){const c=changed(x);let h='<article class="event '+(c?'changed':'')+'"><div class="event-time">'+esc(x.time)+'</div><div class="event-content"><div class="event-title">'+esc(x.title)+'</div>';if(x.place)h+='<div class="event-meta"><div>📍 '+esc(x.place)+'</div>';if(x.people)h+='<div>👥 '+esc(x.people)+'</div>';h+='</div>';if(x.note)h+='<div class="event-note">📝 '+esc(x.note)+'</div>';if(x.status)h+='<span class="status '+(c?'changed':'')+'">'+esc(x.status)+'</span>';h+='<div class="actions">'+attachment(x)+prepLink(x)+'</div></div></article>';return h}
+function eventHtml(x){const c=changed(x);let h='<article class="event '+(c?'changed':'')+'"><div class="event-time">'+esc(x.time)+'</div><div class="event-content"><div class="event-title">'+esc(x.title)+'</div>';if(x.place)h+='<div class="event-meta"><div>📍 '+esc(x.place)+'</div>';if(x.people)h+='<div>👥 '+esc(x.people)+'</div>';h+='</div>';if(x.note)h+='<div class="event-note">📝 '+esc(x.note)+'</div>';if(x.status)h+='<span class="status '+(c?'changed':'')+'">'+esc(x.status)+'</span>';const actions=attachment(x)+prepLink(x);if(actions)h+='<div class="actions">'+actions+'</div>';h+='</div></article>';return h}
 function monday(d){const x=new Date(d);const n=x.getDay();x.setDate(x.getDate()+(n===0?-6:1-n));x.setHours(0,0,0,0);return x}
 function add(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}
 function dayRow(d,open){const ev=sortedEvents(d),today=key(d)===key(new Date());let h='<div class="day-row '+(today?'today ':'')+(open?'open':'')+'"><div class="day-summary" onclick="toggleDay(this)"><div class="day-date">'+String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'<small>'+lunarText(d)+'</small></div><div class="day-info"><div class="day-name">'+dname(d)+(today?'<span class="day-today">HÔM NAY</span>':'')+'</div><div class="day-meta">'+(ev.length?ev.length+' lịch công tác':'Không có lịch')+'</div></div><div class="chevron">›</div></div><div class="day-details">'+(ev.length?ev.map(eventHtml).join(''):'<div class="empty-day">Chưa có lịch công tác.</div>')+'</div></div>';return h}
 function toggleDay(el){el.parentElement.classList.toggle('open')}
-function render(){
-  const now=new Date(),todayEvents=sortedEvents(now);
-  document.getElementById('todayDate').innerHTML='<div class="today-date"><div class="today-main">'+dname(now)+' · '+fmt(now)+'</div><div class="today-lunar">'+lunarText(now)+'</div></div>';
-  document.getElementById('todayEvents').innerHTML=todayEvents.length?todayEvents.map(eventHtml).join(''):'<div class="today-date" style="text-align:center;color:#7b8794">Hôm nay không có lịch công tác.</div>';
-  const m=monday(now),n=add(m,7);document.getElementById('weekRange').textContent=fmt(m)+' – '+fmt(add(m,6));document.getElementById('nextRange').textContent=fmt(n)+' – '+fmt(add(n,6));
-  document.getElementById('weekCurrent').innerHTML=Array.from({length:7},(_,i)=>dayRow(add(m,i),i===now.getDay()-1|| (now.getDay()===0&&i===6))).join('');
-  document.getElementById('weekNext').innerHTML=Array.from({length:7},(_,i)=>dayRow(add(n,i),false)).join('');
-}
+function render(){const now=new Date(),todayEvents=sortedEvents(now);document.getElementById('todayDate').innerHTML='<div class="today-date"><div class="today-main">'+dname(now)+' · '+fmt(now)+'</div><div class="today-lunar">'+lunarText(now)+'</div></div>';document.getElementById('todayEvents').innerHTML=todayEvents.length?todayEvents.map(eventHtml).join(''):'<div class="today-date" style="text-align:center;color:#7b8794">Hôm nay không có lịch công tác.</div>';const m=monday(now),n=add(m,7);document.getElementById('weekRange').textContent=fmt(m)+' – '+fmt(add(m,6));document.getElementById('nextRange').textContent=fmt(n)+' – '+fmt(add(n,6));document.getElementById('weekCurrent').innerHTML=Array.from({length:7},(_,i)=>dayRow(add(m,i),i===now.getDay()-1||(now.getDay()===0&&i===6))).join('');document.getElementById('weekNext').innerHTML=Array.from({length:7},(_,i)=>dayRow(add(n,i),false)).join('')}
 </script>
 </body>
 </html>
