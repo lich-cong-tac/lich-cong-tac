@@ -2,481 +2,1581 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#0b3b70">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Lịch công tác</title>
+
 <style>
-:root{--navy:#0b3b70;--blue:#1769aa;--soft:#eef6fd;--bg:#f3f8fc;--text:#142a4a;--muted:#6b7b8f;--line:#dce8f3;--red:#b91c1c;--redsoft:#fceeee;--white:#fff}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,a{font:inherit}
-.top{background:linear-gradient(135deg,#0b3b70,#0b4f91);color:#fff;padding:17px 14px 15px;box-shadow:0 3px 14px #0002}.topin{max-width:760px;margin:auto;display:flex;align-items:center;gap:13px}.logo{width:54px;height:54px;border-radius:50%;background:#fff;border:2px solid #d9ebfa;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}.logo img{width:100%;height:100%;object-fit:contain}.logo span{font-size:8px;text-align:center;font-weight:800;color:var(--navy);line-height:1.05}.title{font-size:26px;font-weight:800;line-height:1.05}.range{margin-top:7px;font-size:13px;color:#e8f3ff}.nav{max-width:760px;margin:14px auto 0;display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:8px}.nav button{height:43px;border:1px solid #b9d6ee;border-radius:11px;background:transparent;color:#fff;font-weight:700}.nav .cur{background:#fff;color:var(--blue);border-color:#fff}
-.wrap{max-width:760px;margin:auto;padding:12px 12px 30px}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:18px}.day{background:#fff;border:1px solid var(--line);border-radius:13px;padding:9px 3px;text-align:center;cursor:pointer}.day b{display:block;font-size:11px;color:#718095}.day strong{display:block;margin-top:5px;font-size:16px}.day.active{background:var(--blue);border-color:var(--blue);box-shadow:0 4px 12px #1769aa33}.day.active b,.day.active strong{color:#fff}
-.head{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin:4px 2px 12px}.dow{font-size:24px;font-weight:800;color:var(--navy)}.solar{font-size:19px;color:#61738a}.lunar{font-size:12px;color:#8392a3;font-weight:600}
-.event{display:grid;grid-template-columns:118px minmax(0,1fr);background:#fff;border:1px solid var(--line);border-radius:15px;margin-bottom:10px;box-shadow:0 3px 12px #0b3b7010;overflow:hidden}.etime{margin:16px 0 16px 13px;padding-right:12px;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;align-items:center}.period{min-width:65px;text-align:center;padding:6px 8px;border-radius:8px;background:#e8f3ff;color:var(--blue);font-size:13px;font-weight:800}.morning .period{background:var(--redsoft);color:var(--red)}.time{margin-top:8px;font-size:29px;font-weight:800;color:var(--blue);line-height:1}.morning .time{color:var(--red)}.ec{padding:17px 14px;min-width:0}.etitle{font-size:17px;line-height:1.38;font-weight:800;color:#10294d}.meta{margin-top:7px;color:var(--muted);font-size:13px;line-height:1.5}.actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}.action{color:var(--blue);font-size:13px;font-weight:800;text-decoration:none}.empty{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;text-align:center;color:#7d8b9c}.footer{text-align:center;color:#8997a8;font-size:11px;padding:14px}
-@media(max-width:600px){.title{font-size:22px}.range{font-size:12px}.logo{width:48px;height:48px}.day{padding:8px 2px}.day b{font-size:10px}.day strong{font-size:14px}.event{grid-template-columns:92px minmax(0,1fr)}.etime{margin:13px 0 13px 9px;padding-right:8px}.period{min-width:60px;font-size:12px}.time{font-size:24px}.ec{padding:14px 11px}.etitle{font-size:16px}.meta{font-size:12.5px}.action{font-size:13px}.dow{font-size:21px}.solar{font-size:17px}}
+:root{
+  --navy:#0b4b87;
+  --navy-dark:#083b6d;
+  --blue:#1769aa;
+  --blue-soft:#eaf4ff;
+  --bg:#f3f7fb;
+  --white:#fff;
+  --text:#17324f;
+  --muted:#6b7f95;
+  --line:#d8e4ef;
+  --red:#b42318;
+  --red-soft:#fdeeee;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:
+    Arial,
+    "Segoe UI",
+    sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.top{
+  background:linear-gradient(135deg,var(--navy-dark),var(--navy));
+  color:#fff;
+  padding:22px 18px 20px;
+}
+
+.topin{
+  width:min(100%,1000px);
+  margin:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.logo{
+  width:68px;
+  height:68px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #dcecff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  flex:none;
+}
+
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+
+.logo-fallback{
+  display:none;
+  color:#0b4b87;
+  font-size:9px;
+  font-weight:800;
+  line-height:1.1;
+  text-align:center;
+}
+
+.title{
+  font-size:36px;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+
+/* ================= WEEK NAV ================= */
+
+.weeknav{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+}
+
+.weekbtn{
+  min-height:54px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.75);
+  background:transparent;
+  color:#fff;
+  font-size:18px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.weekbtn.current{
+  background:#fff;
+  color:var(--blue);
+}
+
+.weekbtn:active{
+  transform:scale(.99);
+}
+
+/* ================= MAIN ================= */
+
+.wrap{
+  width:min(100%,1000px);
+  margin:auto;
+  padding:20px 14px 60px;
+}
+
+.weekrange{
+  text-align:center;
+  font-size:16px;
+  color:var(--muted);
+  font-weight:700;
+  margin:4px 0 18px;
+}
+
+/* ================= DAYS ================= */
+
+.days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px;
+  margin-bottom:20px;
+}
+
+.day{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 3px;
+  text-align:center;
+  cursor:pointer;
+  min-height:74px;
+}
+
+.day:hover{
+  border-color:#8db9df;
+}
+
+.day.active{
+  background:var(--blue);
+  color:#fff;
+  border-color:var(--blue);
+  box-shadow:0 4px 12px rgba(23,105,170,.18);
+}
+
+.day.today{
+  border:2px solid var(--blue);
+}
+
+.day.active.today{
+  border-color:#fff;
+}
+
+.day .dow{
+  font-size:12px;
+  font-weight:800;
+  opacity:.8;
+}
+
+.day .date{
+  font-size:20px;
+  font-weight:900;
+  margin-top:5px;
+}
+
+/* ================= SELECTED DAY ================= */
+
+.head{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:17px 18px;
+  margin-bottom:14px;
+}
+
+.head-title{
+  font-size:24px;
+  font-weight:900;
+  color:var(--navy);
+}
+
+.head-sub{
+  margin-top:5px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ================= EVENTS ================= */
+
+.event{
+  display:grid;
+  grid-template-columns:105px minmax(0,1fr);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  margin-bottom:12px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(21,54,87,.05);
+}
+
+.period{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:14px 8px;
+  border-right:1px solid var(--line);
+  text-align:center;
+}
+
+.period.morning{
+  background:var(--red-soft);
+  color:var(--red);
+}
+
+.period.afternoon{
+  background:var(--blue-soft);
+  color:var(--blue);
+}
+
+.period-name{
+  font-size:14px;
+  font-weight:900;
+}
+
+.time{
+  font-size:27px;
+  font-weight:900;
+  margin-top:5px;
+  white-space:nowrap;
+}
+
+.ec{
+  padding:16px 17px;
+  min-width:0;
+}
+
+.ec-title{
+  font-size:19px;
+  line-height:1.4;
+  font-weight:900;
+  color:var(--text);
+}
+
+.place{
+  margin-top:8px;
+  font-size:15px;
+  line-height:1.45;
+  color:#52677e;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+.action{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:8px 11px;
+  border-radius:9px;
+  background:var(--blue-soft);
+  color:var(--blue);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:800;
+}
+
+.action:hover{
+  background:#dceeff;
+}
+
+/* ================= EMPTY / LOADING ================= */
+
+.loading,
+.empty,
+.error{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:28px 18px;
+  text-align:center;
+  color:var(--muted);
+  font-size:16px;
+}
+
+.error{
+  color:#a61b1b;
+  background:#fff7f7;
+  border-color:#efcccc;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+  text-align:center;
+  color:#8a9aae;
+  font-size:13px;
+  padding:10px 0 20px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+  .top{
+    padding:16px 12px 17px;
+  }
+
+  .brand{
+    gap:12px;
+    margin-bottom:15px;
+  }
+
+  .logo{
+    width:54px;
+    height:54px;
+  }
+
+  .title{
+    font-size:25px;
+  }
+
+  .weeknav{
+    gap:6px;
+  }
+
+  .weekbtn{
+    min-height:48px;
+    font-size:15px;
+    padding:0 5px;
+  }
+
+  .wrap{
+    padding:14px 10px 50px;
+  }
+
+  .weekrange{
+    font-size:15px;
+    margin:3px 0 13px;
+  }
+
+  .days{
+    gap:4px;
+    margin-bottom:14px;
+  }
+
+  .day{
+    min-height:67px;
+    padding:8px 2px;
+    border-radius:10px;
+  }
+
+  .day .dow{
+    font-size:10px;
+  }
+
+  .day .date{
+    font-size:18px;
+  }
+
+  .head{
+    padding:14px;
+    border-radius:13px;
+  }
+
+  .head-title{
+    font-size:21px;
+  }
+
+  .head-sub{
+    font-size:13px;
+  }
+
+  .event{
+    grid-template-columns:82px minmax(0,1fr);
+    border-radius:13px;
+  }
+
+  .period{
+    padding:12px 4px;
+  }
+
+  .period-name{
+    font-size:12px;
+  }
+
+  .time{
+    font-size:21px;
+  }
+
+  .ec{
+    padding:13px 12px;
+  }
+
+  .ec-title{
+    font-size:17px;
+  }
+
+  .place{
+    font-size:14px;
+  }
+
+  .action{
+    font-size:13px;
+    padding:7px 9px;
+  }
+}
 </style>
-</head><body>
-<header class="top"><div class="topin"><div class="logo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Logo_MTTQ_Vi%E1%BB%87t_Nam.svg/240px-Logo_MTTQ_Vi%E1%BB%87t_Nam.svg.png" alt="MTTQ" onerror="this.style.display='none';this.parentElement.innerHTML='<span>MẶT TRẬN<br>TTQ<br>LÀO CAI</span>'"></div><div><div class="title">LỊCH CÔNG TÁC</div><div id="range" class="range"></div></div></div><div class="nav"><button onclick="moveWeek(-1)">‹ Tuần trước</button><button class="cur" onclick="currentWeek()">Tuần hiện tại</button><button onclick="moveWeek(1)">Tuần sau ›</button></div></header>
-<main class="wrap"><div id="days" class="days"></div><div class="head"><div id="dow" class="dow"></div><div id="solar" class="solar"></div><div id="lunar" class="lunar"></div></div><div id="events"></div><div class="footer">Dữ liệu lịch được cập nhật tự động từ Google Sheet</div></main>
+</head>
+
+<body>
+
+<header class="top">
+
+  <div class="topin">
+
+    <div class="brand">
+
+      <div class="logo">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Logo_MTTQ_Vi%E1%BB%87t_Nam.svg/240px-Logo_MTTQ_Vi%E1%BB%87t_Nam.svg.png"
+          alt="MTTQ"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+        >
+        <div class="logo-fallback">
+          MẶT TRẬN<br>
+          TQ<br>
+          LÀO CAI
+        </div>
+      </div>
+
+      <div class="title">
+        LỊCH CÔNG TÁC
+      </div>
+
+    </div>
+
+    <div class="weeknav">
+
+      <button
+        class="weekbtn"
+        onclick="moveWeek(-7)">
+        ‹ Tuần trước
+      </button>
+
+      <button
+        class="weekbtn current"
+        onclick="goCurrentWeek()">
+        Tuần hiện tại
+      </button>
+
+      <button
+        class="weekbtn"
+        onclick="moveWeek(7)">
+        Tuần sau ›
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="wrap">
+
+  <div id="range" class="weekrange">
+    Đang tải lịch công tác...
+  </div>
+
+  <div id="days" class="days"></div>
+
+  <div id="head"></div>
+
+  <div id="schedule">
+    <div class="loading">
+      Đang tải dữ liệu từ Google Sheet...
+    </div>
+  </div>
+
+</main>
+
+
+<div class="footer">
+  Dữ liệu lịch được cập nhật tự động từ Google Sheet
+</div>
+
+
 <script>
-const API_URL="https://script.google.com/macros/s/AKfycbwnLLNPn7Vsxoqs9gOi0UH_iMtC_2it12QlHeBfUVyhiOalsnqyu9ga2u4OIVKN9WtJww/exec";
-let data=[], ws=monday(new Date()), selected=new Date();
-function load(){const old=document.getElementById('jsonp');if(old)old.remove();const cb='cb_'+Date.now();window[cb]=d=>{data=Array.isArray(d)?d:[];const s=document.getElementById('jsonp');if(s)s.remove();try{delete window[cb]}catch(e){}render()};const s=document.createElement('script');s.id='jsonp';s.src=API_URL+'?callback='+cb+'&t='+Date.now();s.onerror=()=>{document.getElementById('events').innerHTML='<div class="empty">Không tải được dữ liệu lịch công tác.</div>'};document.body.appendChild(s)}
-function monday(d){const x=new Date(d),n=x.getDay();x.setDate(x.getDate()+(n===0?-6:1-n));x.setHours(0,0,0,0);return x}function add(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x}function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}function fmt(d){return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()}function dayname(d){return ['Chủ nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'][d.getDay()]}function short(d){return ['CN','T2','T3','T4','T5','T6','T7'][d.getDay()]}
-function parseDate(v){if(!v)return null;let p=String(v).trim().split('/');if(p.length===3)return new Date(+p[2],+p[1]-1,+p[0]);p=String(v).trim().split('-');if(p.length===3)return new Date(+p[0],+p[1]-1,+p[2]);let d=new Date(v);return isNaN(d)?null:d}function timeVal(v){const m=String(v||'').match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);return m? +m[1]*60 + +m[2] : 99999}function esc(v){return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}function url(v){const u=String(v||'').trim();return /^https?:\/\//i.test(u)?u:''}
-function events(d){const k=key(d);return data.filter(x=>{const z=parseDate(x.date);return z&&key(z)===k}).sort((a,b)=>timeVal(a.time)-timeVal(b.time))}
-function links(x){let h='';const f=url(x.file),p=url(x.prep);if(f)h+='<a class="action" href="'+esc(f)+'" target="_blank" rel="noopener">📎 Tài liệu</a>';if(p)h+='<a class="action" href="'+esc(p)+'" target="_blank" rel="noopener">📑 Chuẩn bị</a>';return h}
-function eventHtml(x){const morning=timeVal(x.time)<720, acts=links(x);let h='<article class="event '+(morning?'morning':'')+'"><div class="etime"><div class="period">'+(morning?'Sáng':'Chiều')+'</div><div class="time">'+esc(x.time)+'</div></div><div class="ec"><div class="etitle">'+esc(x.title)+'</div>';if(x.place)h+='<div class="meta">📍 '+esc(x.place)+'</div>';if(acts)h+='<div class="actions">'+acts+'</div>';h+='</div></article>';return h}
-function render(){document.getElementById('range').textContent='Từ ngày '+fmt(ws)+' đến '+fmt(add(ws,6));const box=document.getElementById('days');box.innerHTML=Array.from({length:7},(_,i)=>{const d=add(ws,i);return '<div class="day '+(key(d)===key(selected)?'active':'')+'" onclick="pick('+i+')"><b>'+short(d)+'</b><strong>'+String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'</strong></div>'}).join('');document.getElementById('dow').textContent=dayname(selected);document.getElementById('solar').textContent=fmt(selected);document.getElementById('lunar').textContent=lunarText(selected);const ev=events(selected);document.getElementById('events').innerHTML=ev.length?ev.map(eventHtml).join(''):'<div class="empty">Hôm nay không có lịch công tác.</div>'}
-function pick(i){selected=add(ws,i);render();window.scrollTo({top:250,behavior:'smooth'})}function moveWeek(n){ws=add(ws,n*7);selected=new Date(ws);render();window.scrollTo({top:0,behavior:'smooth'})}function currentWeek(){ws=monday(new Date());selected=new Date();render();window.scrollTo({top:0,behavior:'smooth'})}
-function INT(x){
-  return Math.floor(x);
-}
 
-function jdFromDate(dd,mm,yy){
-  let a = INT((14-mm)/12);
-  let y = yy + 4800 - a;
-  let m = mm + 12*a - 3;
-  let j = dd + INT((153*m+2)/5) + 365*y + INT(y/4) - INT(y/100) + INT(y/400) - 32045;
+/* =========================================================
+   GOOGLE APPS SCRIPT WEB APP
+   ========================================================= */
 
-  if(j < 2299161){
-    j = dd + INT((153*m+2)/5) + 365*y + INT(y/4) - 32083;
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbwnLLNPn7Vsxoqs9gOi0UH_iMtC_2it12QlHeBfUVyhiOalsnqyu9ga2u4OIVKN9WtJww/exec";
+
+
+/* =========================================================
+   BIẾN
+   ========================================================= */
+
+let data = [];
+
+let weekStart = monday(new Date());
+
+let selectedDate = new Date();
+
+
+/* =========================================================
+   LOAD DỮ LIỆU TỪ GOOGLE SHEET
+   ========================================================= */
+
+function load(){
+
+  const old = document.getElementById("jsonp");
+
+  if(old){
+    old.remove();
   }
 
-  return j;
-}
+  const callback =
+    "lichCallback_" + Date.now();
 
-function NewMoon(k){
-  const T = k/1236.85;
-  const T2 = T*T;
-  const T3 = T2*T;
-  const dr = Math.PI/180;
+  window[callback] = function(result){
 
-  let J = 2415020.75933 + 29.53058868*k + 0.0001178*T2 - 0.000000155*T3;
-  J += 0.00033*Math.sin((166.56+132.87*T-0.009173*T2)*dr);
+    try{
 
-  const M = 359.2242 + 29.10535608*k - 0.0000333*T2 - 0.00000347*T3;
-  const Mp = 306.0253 + 385.81691806*k + 0.0107306*T2 + 0.00001236*T3;
-  const F = 21.2964 + 390.67050646*k - 0.0016528*T2 - 0.00000239*T3;
+      data = Array.isArray(result)
+        ? result
+        : [];
 
-  let C =
-    (0.1734-0.000393*T)*Math.sin(M*dr)
-    + 0.0021*Math.sin(2*M*dr)
-    - 0.4068*Math.sin(Mp*dr)
-    - 0.0161*Math.sin(2*Mp*dr)
-    - 0.0004*Math.sin(3*Mp*dr)
-    + 0.0104*Math.sin(2*F*dr)
-    - 0.0051*Math.sin((M+Mp)*dr)
-    - 0.0074*Math.sin((M-Mp)*dr)
-    + 0.0004*Math.sin((2*F+M)*dr)
-    - 0.0004*Math.sin((2*F-M)*dr)
-    - 0.0006*Math.sin((2*F+Mp)*dr)
-    + 0.001*Math.sin((2*F-Mp)*dr)
-    + 0.0005*Math.sin((2*Mp+M)*dr);
+      delete window[callback];
 
-  let dt;
+      const script =
+        document.getElementById("jsonp");
 
-  if(T < -11){
-    dt = 0.001 + 0.000839*T + 0.0002261*T2 - 0.00000845*T3 - 0.000000081*T*T3;
-  }else{
-    dt = -0.000278 + 0.000265*T + 0.000262*T2;
-  }
+      if(script){
+        script.remove();
+      }
 
-  return J + C - dt;
-}
+      render();
 
-function SunLongitude(j){
-  const T = (j-2451545)/36525;
-  const T2 = T*T;
-  const dr = Math.PI/180;
+    }catch(error){
 
-  const M = 357.5291 + 35999.0503*T - 0.0001559*T2 - 0.00000048*T*T2;
-  const L0 = 280.46645 + 36000.76983*T + 0.0003032*T2;
+      console.error(error);
 
-  const DL =
-    (1.9146-0.004817*T-0.000014*T2)*Math.sin(M*dr)
-    + (0.019993-0.000101*T)*Math.sin(2*M*dr)
-    + 0.00029*Math.sin(3*M*dr);
+      showError(
+        "Không thể xử lý dữ liệu lịch công tác."
+      );
 
-  let L = (L0 + DL)*dr;
-  L = L - Math.PI*2*INT(L/(Math.PI*2));
-
-  return INT(L/dr/30);
-}
-
-function getNewMoonDay(k,tz){
-  return INT(NewMoon(k)+0.5+tz/24);
-}
-
-function getSunLongitude(day,tz){
-  return INT(SunLongitude(day-0.5-tz/24));
-}
-
-function getLunarMonth11(y,tz){
-  const off = jdFromDate(31,12,y)-2415021;
-  const k = INT(off/29.530588853);
-  let nm = getNewMoonDay(k,tz);
-
-  if(getSunLongitude(nm,tz) >= 9){
-    nm = getNewMoonDay(k-1,tz);
-  }
-
-  return nm;
-}
-
-function getLeapMonthOffset(a11,tz){
-  const k = INT(0.5+(a11-2415021.076998695)/29.530588853);
-
-  let last = 0;
-  let i = 1;
-  let arc = getSunLongitude(getNewMoonDay(k+i,tz),tz);
-
-  do{
-    last = arc;
-    i++;
-    arc = getSunLongitude(getNewMoonDay(k+i,tz),tz);
-  }while(arc !== last && i < 15);
-
-  return i-1;
-}
-
-function convertSolar2Lunar(dd,mm,yy,tz){
-  const day = jdFromDate(dd,mm,yy);
-  const k = INT((day-2415021.076998695)/29.530588853);
-
-  let monthStart = getNewMoonDay(k+1,tz);
-
-  if(monthStart > day){
-    monthStart = getNewMoonDay(k,tz);
-  }
-
-  let a11 = getLunarMonth11(yy,tz);
-  let b11 = a11;
-  let lunarYear = yy;
-
-  if(a11 >= monthStart){
-    a11 = getLunarMonth11(yy-1,tz);
-  }else{
-    b11 = getLunarMonth11(yy+1,tz);
-    lunarYear = yy+1;
-  }
-
-  const lunarDay = day-monthStart+1;
-  const diff = INT((monthStart-a11)/29);
-  const leap = (b11-a11 > 365);
-  const leapDiff = leap ? getLeapMonthOffset(a11,tz) : 0;
-
-  let lunarMonth = diff+11;
-  let lunarLeap = false;
-
-  if(leap && diff >= leapDiff){
-    lunarMonth = diff+10;
-
-    if(diff === leapDiff){
-      lunarLeap = true;
     }
-  }
 
-  if(lunarMonth > 12){
-    lunarMonth -= 12;
-  }
+  };
 
-  if(lunarMonth >= 11 && diff < 4){
-    lunarYear -= 1;
-  }
 
-  return [lunarDay,lunarMonth,lunarYear,lunarLeap];
-}
+  const script =
+    document.createElement("script");
 
-function lunarText(date){
-  try{
-    const l = convertSolar2Lunar(
-      date.getDate(),
-      date.getMonth()+1,
-      date.getFullYear(),
-      7
+  script.id = "jsonp";
+
+  script.src =
+    API_URL +
+    "?callback=" +
+    callback +
+    "&t=" +
+    Date.now();
+
+
+  script.onerror = function(){
+
+    delete window[callback];
+
+    showError(
+      "Không kết nối được với Google Sheet. Vui lòng thử tải lại trang."
     );
 
-    return String(l[0]).padStart(2,"0") + "/" +
-           String(l[1]).padStart(2,"0") +
-           (l[3] ? " nhuận" : "") +
-           " ÂL";
-  }catch(e){
-    return "";
-  }
+  };
+
+
+  document.body.appendChild(script);
+
 }
 
-function parseDate(value){
-  if(!value) return null;
 
-  const text = String(value).trim();
-  let p = text.split("/");
+/* =========================================================
+   NGÀY - TUẦN
+   ========================================================= */
 
-  if(p.length === 3){
-    let y = Number(p[2]);
-    let m = Number(p[1])-1;
-    let d = Number(p[0]);
+function monday(date){
 
-    if(y < 100) y += 2000;
+  const d = new Date(date);
 
-    return new Date(y,m,d);
-  }
+  d.setHours(0,0,0,0);
 
-  p = text.split("-");
+  const day = d.getDay();
 
-  if(p.length === 3){
-    return new Date(Number(p[0]),Number(p[1])-1,Number(p[2]));
-  }
+  const diff =
+    day === 0
+      ? -6
+      : 1 - day;
 
-  const d = new Date(text);
-  return isNaN(d) ? null : d;
+  d.setDate(
+    d.getDate() + diff
+  );
+
+  return d;
+
 }
+
+
+function addDays(date, number){
+
+  const d = new Date(date);
+
+  d.setDate(
+    d.getDate() + number
+  );
+
+  return d;
+
+}
+
 
 function key(date){
-  return date.getFullYear() + "-" +
-         String(date.getMonth()+1).padStart(2,"0") + "-" +
-         String(date.getDate()).padStart(2,"0");
-}
 
-function fmt(date){
-  return String(date.getDate()).padStart(2,"0") + "/" +
-         String(date.getMonth()+1).padStart(2,"0") + "/" +
-         date.getFullYear();
-}
-
-function dname(date){
   return [
-    "Chủ nhật",
-    "Thứ Hai",
-    "Thứ Ba",
-    "Thứ Tư",
-    "Thứ Năm",
-    "Thứ Sáu",
-    "Thứ Bảy"
-  ][date.getDay()];
+    date.getFullYear(),
+    String(date.getMonth()+1).padStart(2,"0"),
+    String(date.getDate()).padStart(2,"0")
+  ].join("-");
+
 }
 
-function timeVal(value){
-  const match = String(value || "").match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);
 
-  if(!match) return 99999;
+/* =========================================================
+   ĐỌC NGÀY TỪ GOOGLE SHEET
+   Hỗ trợ dd/MM/yyyy
+   ========================================================= */
 
-  return Number(match[1])*60 + Number(match[2]);
+function parseDate(value){
+
+  if(!value){
+    return null;
+  }
+
+  const text =
+    String(value).trim();
+
+  const p =
+    text.split("/");
+
+  if(p.length === 3){
+
+    return new Date(
+      Number(p[2]),
+      Number(p[1]) - 1,
+      Number(p[0])
+    );
+
+  }
+
+  const d =
+    new Date(text);
+
+  return isNaN(d)
+    ? null
+    : d;
+
 }
 
-function esc(value){
+
+/* =========================================================
+   ĐỊNH DẠNG
+   ========================================================= */
+
+function formatDate(date){
+
+  return String(date.getDate()).padStart(2,"0")
+    + "/"
+    + String(date.getMonth()+1).padStart(2,"0")
+    + "/"
+    + date.getFullYear();
+
+}
+
+
+function formatShort(date){
+
+  return String(date.getDate()).padStart(2,"0")
+    + "/"
+    + String(date.getMonth()+1).padStart(2,"0");
+
+}
+
+
+function formatTime(value){
+
+  if(!value){
+    return "";
+  }
+
+  const text =
+    String(value).trim();
+
+  const match =
+    text.match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);
+
+  if(match){
+
+    return String(match[1]).padStart(2,"0")
+      + ":"
+      + String(match[2]).padStart(2,"0");
+
+  }
+
+  return text;
+
+}
+
+
+/* =========================================================
+   THỨ
+   ========================================================= */
+
+const DOW = [
+  "CN",
+  "T2",
+  "T3",
+  "T4",
+  "T5",
+  "T6",
+  "T7"
+];
+
+
+/* =========================================================
+   NHÓM SỰ KIỆN
+   ========================================================= */
+
+function eventsOn(date){
+
+  const k =
+    key(date);
+
+  return data
+    .filter(item => {
+
+      const d =
+        parseDate(item.date);
+
+      return d &&
+        key(d) === k;
+
+    })
+    .sort((a,b) => {
+
+      return timeMinutes(a.time)
+        - timeMinutes(b.time);
+
+    });
+
+}
+
+
+/* =========================================================
+   TÍNH PHÚT
+   ========================================================= */
+
+function timeMinutes(value){
+
+  const text =
+    String(value || "");
+
+  const m =
+    text.match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);
+
+  if(!m){
+    return 9999;
+  }
+
+  return Number(m[1]) * 60
+    + Number(m[2]);
+
+}
+
+
+/* =========================================================
+   TUẦN
+   ========================================================= */
+
+function render(){
+
+  renderRange();
+
+  renderDays();
+
+  renderSelectedDay();
+
+}
+
+
+function renderRange(){
+
+  const end =
+    addDays(weekStart,6);
+
+  document.getElementById("range").textContent =
+    "Tuần " +
+    formatShort(weekStart) +
+    " – " +
+    formatShort(end) +
+    "/" +
+    end.getFullYear();
+
+}
+
+
+/* =========================================================
+   HIỂN THỊ 7 NGÀY
+   ========================================================= */
+
+function renderDays(){
+
+  const box =
+    document.getElementById("days");
+
+  box.innerHTML = "";
+
+  for(let i=0;i<7;i++){
+
+    const d =
+      addDays(weekStart,i);
+
+    const div =
+      document.createElement("div");
+
+    const today =
+      key(d) === key(new Date());
+
+    const active =
+      key(d) === key(selectedDate);
+
+    div.className =
+      "day"
+      + (active ? " active" : "")
+      + (today ? " today" : "");
+
+    div.innerHTML =
+      '<div class="dow">'
+      + DOW[d.getDay()]
+      + '</div>'
+      + '<div class="date">'
+      + d.getDate()
+      + '</div>';
+
+    div.onclick =
+      function(){
+
+        selectedDate =
+          new Date(d);
+
+        renderDays();
+
+        renderSelectedDay();
+
+        window.scrollTo({
+          top:220,
+          behavior:"smooth"
+        });
+
+      };
+
+    box.appendChild(div);
+
+  }
+
+}
+
+
+/* =========================================================
+   NGÀY ĐANG CHỌN
+   ========================================================= */
+
+function renderSelectedDay(){
+
+  const list =
+    eventsOn(selectedDate);
+
+  const head =
+    document.getElementById("head");
+
+  head.innerHTML =
+
+    '<div class="head">'
+    + '<div class="head-title">'
+    + DOW[selectedDate.getDay()]
+    + " - "
+    + formatDate(selectedDate)
+    + '</div>'
+    + '<div class="head-sub">'
+    + lunarText(selectedDate)
+    + '</div>'
+    + '</div>';
+
+
+  const schedule =
+    document.getElementById("schedule");
+
+
+  if(list.length === 0){
+
+    schedule.innerHTML =
+      '<div class="empty">'
+      + 'Không có lịch công tác trong ngày này.'
+      + '</div>';
+
+    return;
+
+  }
+
+
+  schedule.innerHTML =
+    list.map(eventHtml).join("");
+
+}
+
+
+/* =========================================================
+   HIỂN THỊ MỘT LỊCH
+   ========================================================= */
+
+function eventHtml(item){
+
+  const minutes =
+    timeMinutes(item.time);
+
+  const morning =
+    minutes < 720;
+
+  const period =
+    morning
+      ? "Sáng"
+      : "Chiều";
+
+  const periodClass =
+    morning
+      ? "morning"
+      : "afternoon";
+
+
+  let actions = "";
+
+
+  if(isUrl(item.file)){
+
+    actions +=
+      '<a class="action" target="_blank" href="'
+      + escapeHtml(item.file)
+      + '">📎 Tài liệu</a>';
+
+  }
+
+
+  if(isUrl(item.prep)){
+
+    actions +=
+      '<a class="action" target="_blank" href="'
+      + escapeHtml(item.prep)
+      + '">📑 Chuẩn bị</a>';
+
+  }
+
+
+  return (
+
+    '<article class="event">'
+
+      + '<div class="period '
+      + periodClass
+      + '">'
+
+        + '<div class="period-name">'
+        + period
+        + '</div>'
+
+        + '<div class="time">'
+        + escapeHtml(formatTime(item.time))
+        + '</div>'
+
+      + '</div>'
+
+      + '<div class="ec">'
+
+        + '<div class="ec-title">'
+        + escapeHtml(item.title || "")
+        + '</div>'
+
+        + (
+          item.place
+          ? '<div class="place">📍 '
+            + escapeHtml(item.place)
+            + '</div>'
+          : ''
+        )
+
+        + (
+          actions
+          ? '<div class="actions">'
+            + actions
+            + '</div>'
+          : ''
+        )
+
+      + '</div>'
+
+    + '</article>'
+
+  );
+
+}
+
+
+/* =========================================================
+   KIỂM TRA LINK
+   ========================================================= */
+
+function isUrl(value){
+
+  if(!value){
+    return false;
+  }
+
+  try{
+
+    const u =
+      new URL(String(value).trim());
+
+    return (
+      u.protocol === "http:"
+      ||
+      u.protocol === "https:"
+    );
+
+  }catch(e){
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHtml(value){
+
   return String(value || "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#039;");
+
 }
 
-function changed(event){
-  const status = String(event.status || "").toLowerCase();
-  const note = String(event.note || "").toLowerCase();
 
-  return status.includes("thay đổi") ||
-         status.includes("thay doi") ||
-         note.includes("đổi") ||
-         note.includes("doi");
+/* =========================================================
+   CHUYỂN TUẦN
+   ========================================================= */
+
+function moveWeek(days){
+
+  weekStart =
+    addDays(weekStart,days);
+
+  selectedDate =
+    new Date(weekStart);
+
+  render();
+
 }
 
-function validUrl(value){
-  const u = String(value || "").trim();
 
-  return /^https?:\/\//i.test(u) ? u : "";
+function goCurrentWeek(){
+
+  weekStart =
+    monday(new Date());
+
+  selectedDate =
+    new Date();
+
+  render();
+
 }
 
-function attachment(event){
-  const u = validUrl(event.file);
 
-  if(!u) return "";
+/* =========================================================
+   LỖI
+   ========================================================= */
 
-  return '<a class="action file" href="' + esc(u) +
-         '" target="_blank" rel="noopener">📎 Tài liệu</a>';
+function showError(message){
+
+  document.getElementById("schedule").innerHTML =
+    '<div class="error">'
+    + escapeHtml(message)
+    + '</div>';
+
 }
 
-function prepLink(event){
-  const u = validUrl(event.prep);
 
-  if(!u) return "";
+/* =========================================================
+   ÂM LỊCH
+   ========================================================= */
 
-  return '<a class="action prep" href="' + esc(u) +
-         '" target="_blank" rel="noopener">📑 Chuẩn bị</a>';
+function INT(x){
+
+  return Math.floor(x);
+
 }
 
-function sortedEvents(date){
-  const dateKey = key(date);
 
-  return scheduleData
-    .filter(function(event){
-      const d = parseDate(event.date);
-      return d && key(d) === dateKey;
-    })
-    .sort(function(a,b){
-      return timeVal(a.time) - timeVal(b.time);
-    });
+function jdFromDate(dd,mm,yy){
+
+  const a =
+    INT((14-mm)/12);
+
+  const y =
+    yy + 4800 - a;
+
+  const m =
+    mm + 12*a - 3;
+
+  return dd
+    + INT((153*m+2)/5)
+    + 365*y
+    + INT(y/4)
+    - INT(y/100)
+    + INT(y/400)
+    - 32045;
+
 }
 
-function eventHtml(event){
-  const isChanged = changed(event);
 
-  let html =
-    '<article class="event ' + (isChanged ? "changed" : "") + '">' +
-      '<div class="event-time">' + esc(event.time) + '</div>' +
-      '<div class="event-content">' +
-        '<div class="event-title">' + esc(event.title) + '</div>';
+function jdToDate(jd){
 
-  if(event.place || event.people){
-    html += '<div class="event-meta">';
+  let a =
+    jd + 32044;
 
-    if(event.place){
-      html += '<div>📍 ' + esc(event.place) + '</div>';
-    }
+  let b =
+    INT((4*a+3)/146097);
 
-    if(event.people){
-      html += '<div>👥 ' + esc(event.people) + '</div>';
-    }
+  let c =
+    a - INT((146097*b)/4);
 
-    html += '</div>';
+  let d =
+    INT((4*c+3)/1461);
+
+  let e =
+    c - INT((1461*d)/4);
+
+  let m =
+    INT((5*e+2)/153);
+
+  let day =
+    e - INT((153*m+2)/5) + 1;
+
+  let month =
+    m + 3 - 12*INT(m/10);
+
+  let year =
+    100*b + d - 4800 + INT(m/10);
+
+  return [day,month,year];
+
+}
+
+
+function getNewMoonDay(k,timeZone){
+
+  const T =
+    k / 1236.85;
+
+  const T2 =
+    T*T;
+
+  const T3 =
+    T2*T;
+
+  const dr =
+    Math.PI/180;
+
+  let Jd1 =
+    2415020.75933
+    + 29.53058868*k
+    + 0.0001178*T2
+    - 0.000000155*T3;
+
+  Jd1 +=
+    0.00033 *
+    Math.sin(
+      (166.56 + 132.87*T - 0.009173*T2)
+      * dr
+    );
+
+  const M =
+    359.2242
+    + 29.10535608*k
+    - 0.0000333*T2
+    - 0.00000347*T3;
+
+  const Mpr =
+    306.0253
+    + 385.81691806*k
+    + 0.0107306*T2
+    + 0.00001236*T3;
+
+  const F =
+    21.2964
+    + 390.67050646*k
+    - 0.0016528*T2
+    - 0.00000239*T3;
+
+  let C1 =
+    (0.1734 - 0.000393*T)
+      * Math.sin(M*dr)
+    + 0.0021
+      * Math.sin(2*M*dr)
+    - 0.4068
+      * Math.sin(Mpr*dr)
+    + 0.0161
+      * Math.sin(2*Mpr*dr)
+    - 0.0004
+      * Math.sin(3*Mpr*dr)
+    + 0.0104
+      * Math.sin(2*F*dr)
+    - 0.0051
+      * Math.sin((M+Mpr)*dr)
+    - 0.0074
+      * Math.sin((M-Mpr)*dr)
+    + 0.0004
+      * Math.sin((2*F+M)*dr)
+    - 0.0004
+      * Math.sin((2*F-M)*dr)
+    - 0.0006
+      * Math.sin((2*F+Mpr)*dr)
+    + 0.0010
+      * Math.sin((2*F-Mpr)*dr)
+    + 0.0005
+      * Math.sin((2*Mpr+M)*dr);
+
+  let deltaT;
+
+  if(T < -11){
+
+    deltaT =
+      0.001
+      + 0.000839*T
+      + 0.0002261*T2
+      - 0.00000845*T3
+      - 0.000000081*T*T3;
+
+  }else{
+
+    deltaT =
+      -0.000278
+      + 0.000265*T
+      + 0.000262*T2;
+
   }
 
-  if(event.note){
-    html += '<div class="event-note">📝 ' + esc(event.note) + '</div>';
+  const JdNew =
+    Jd1
+    + C1
+    - deltaT;
+
+  return INT(
+    JdNew + 0.5 + timeZone/24
+  );
+
+}
+
+
+function getSunLongitude(jdn,timeZone){
+
+  const T =
+    (jdn - 2451545.5 - timeZone/24)
+    / 36525;
+
+  const T2 =
+    T*T;
+
+  const dr =
+    Math.PI/180;
+
+  const M =
+    357.52910
+    + 35999.05030*T
+    - 0.0001559*T2
+    - 0.00000048*T*T2;
+
+  const L0 =
+    280.46645
+    + 36000.76983*T
+    + 0.0003032*T2;
+
+  let DL =
+    (1.914600 - 0.004817*T - 0.000014*T2)
+      * Math.sin(M*dr)
+    + (0.019993 - 0.000101*T)
+      * Math.sin(2*M*dr)
+    + 0.000290
+      * Math.sin(3*M*dr);
+
+  let L =
+    (L0 + DL) * dr;
+
+  L =
+    L - Math.PI*2
+      * INT(L/(Math.PI*2));
+
+  return INT(
+    L / Math.PI * 6
+  );
+
+}
+
+
+function getLunarMonth11(year,timeZone){
+
+  const off =
+    jdFromDate(31,12,year)
+    - 2415021;
+
+  const k =
+    INT(off/29.530588853);
+
+  let nm =
+    getNewMoonDay(k,timeZone);
+
+  const sunLong =
+    getSunLongitude(nm,timeZone);
+
+  if(sunLong >= 9){
+
+    nm =
+      getNewMoonDay(k-1,timeZone);
+
   }
 
-  if(event.status){
-    html += '<span class="status ' +
-      (isChanged ? "changed" : "") +
-      '">' + esc(event.status) + '</span>';
-  }
+  return nm;
 
-  const actions = attachment(event) + prepLink(event);
-
-  if(actions){
-    html += '<div class="actions">' + actions + '</div>';
-  }
-
-  html += '</div></article>';
-
-  return html;
 }
 
-function monday(date){
-  const d = new Date(date);
-  const day = d.getDay();
 
-  d.setDate(d.getDate() + (day === 0 ? -6 : 1-day));
-  d.setHours(0,0,0,0);
+function getLeapMonthOffset(a11,timeZone){
 
-  return d;
-}
+  const k =
+    INT(
+      0.5
+      + (a11 - 2415021.076998695)
+      / 29.530588853
+    );
 
-function addDays(date,n){
-  const d = new Date(date);
-  d.setDate(d.getDate()+n);
-  return d;
-}
+  let last =
+    0;
 
-function dayRow(date,open){
-  const events = sortedEvents(date);
-  const today = key(date) === key(new Date());
+  let i =
+    1;
 
-  let html =
-    '<div class="day-row ' +
-    (today ? "today " : "") +
-    (open ? "open" : "") +
-    '">' +
+  let arc =
+    getSunLongitude(
+      getNewMoonDay(k+i,timeZone),
+      timeZone
+    );
 
-      '<div class="day-summary" onclick="toggleDay(this)">' +
+  do{
 
-        '<div class="day-date">' +
-          String(date.getDate()).padStart(2,"0") + "/" +
-          String(date.getMonth()+1).padStart(2,"0") +
-          '<small>' + lunarText(date) + '</small>' +
-        '</div>' +
+    last =
+      arc;
 
-        '<div class="day-info">' +
-          '<div class="day-name">' +
-            dname(date) +
-            (today ? '<span class="day-today">HÔM NAY</span>' : '') +
-          '</div>' +
+    i++;
 
-          '<div class="day-meta">' +
-            (events.length
-              ? events.length + " lịch công tác"
-              : "Không có lịch") +
-          '</div>' +
-
-        '</div>' +
-
-        '<div class="chevron">›</div>' +
-
-      '</div>' +
-
-      '<div class="day-details">' +
-
-        (events.length
-          ? events.map(eventHtml).join("")
-          : '<div class="empty-day">Chưa có lịch công tác.</div>') +
-
-      '</div>' +
-
-    '</div>';
-
-  return html;
-}
-
-function toggleDay(element){
-  element.parentElement.classList.toggle("open");
-}
-
-function render(){
-  const now = new Date();
-  const todayEvents = sortedEvents(now);
-
-  document.getElementById("todayDate").innerHTML =
-    '<div class="today-date">' +
-      '<div class="today-main">' +
-        dname(now) + " · " + fmt(now) +
-      '</div>' +
-      '<div class="today-lunar">' +
-        lunarText(now) +
-      '</div>' +
-    '</div>';
-
-  document.getElementById("todayEvents").innerHTML =
-    todayEvents.length
-      ? todayEvents.map(eventHtml).join("")
-      : '<div class="today-date" style="text-align:center;color:#7b8794">' +
-          'Hôm nay không có lịch công tác.' +
-        '</div>';
-
-  const currentMonday = monday(now);
-  const nextMonday = addDays(currentMonday,7);
-
-  document.getElementById("weekRange").textContent =
-    fmt(currentMonday) + " – " + fmt(addDays(currentMonday,6));
-
-  document.getElementById("nextRange").textContent =
-    fmt(nextMonday) + " – " + fmt(addDays(nextMonday,6));
-
-  const todayIndex = now.getDay() === 0 ? 6 : now.getDay()-1;
-
-  document.getElementById("weekCurrent").innerHTML =
-    Array.from({length:7},function(_,i){
-      return dayRow(
-        addDays(currentMonday,i),
-        i === todayIndex
+    arc =
+      getSunLongitude(
+        getNewMoonDay(k+i,timeZone),
+        timeZone
       );
-    }).join("");
 
-  document.getElementById("weekNext").innerHTML =
-    Array.from({length:7},function(_,i){
-      return dayRow(addDays(nextMonday,i),false);
-    }).join("");
+  }while(
+    arc !== last &&
+    i < 14
+  );
+
+  return i-1;
+
 }
 
-document.addEventListener('DOMContentLoaded',load);
-</script></body></html>
+
+function convertSolar2Lunar(dd,mm,yy,timeZone){
+
+  const dayNumber =
+    jdFromDate(dd,mm,yy);
+
+  const k =
+    INT(
+      (dayNumber - 2415021.076998695)
+      / 29.530588853
+    );
+
+  let monthStart =
+    getNewMoonDay(k+1,timeZone);
+
+  if(monthStart > dayNumber){
+
+    monthStart =
+      getNewMoonDay(k,timeZone);
+
+  }
+
+  let a11 =
+    getLunarMonth11(yy,timeZone);
+
+  let b11 =
+    a11;
+
+  let lunarYear;
+
+  if(a11 >= monthStart){
+
+    lunarYear =
+      yy;
+
+    a11 =
+      getLunarMonth11(
+        yy-1,
+        timeZone
+      );
+
+  }else{
+
+    lunarYear =
+      yy+1;
+
+    b11 =
+      getLunarMonth11(
+        yy+1,
+        timeZone
+      );
+
+  }
+
+  const lunarDay =
+    dayNumber
+    - monthStart
+    + 1;
+
+  const diff =
+    INT(
+      (monthStart - a11)
+      / 29
+    );
+
+  let lunarMonth =
+    diff + 11;
+
+  let lunarLeap =
+    0;
+
+  if(b11 - a11 > 365){
+
+    const leapMonthDiff =
+      getLeapMonthOffset(
+        a11,
+        timeZone
+      );
+
+    if(diff >= leapMonthDiff){
+
+      lunarMonth =
+        diff + 10;
+
+      if(diff === leapMonthDiff){
+
+        lunarLeap = 1;
+
+      }
+
+    }
+
+  }
+
+  if(lunarMonth > 12){
+
+    lunarMonth -= 12;
+
+  }
+
+  if(lunarMonth >= 11 && diff < 4){
+
+    lunarYear--;
+
+  }
+
+  return [
+    lunarDay,
+    lunarMonth,
+    lunarYear,
+    lunarLeap
+  ];
+
+}
+
+
+function lunarText(date){
+
+  try{
+
+    const lunar =
+      convertSolar2Lunar(
+        date.getDate(),
+        date.getMonth()+1,
+        date.getFullYear(),
+        7
+      );
+
+    return "Âm lịch: "
+      + lunar[0]
+      + "/"
+      + lunar[1]
+      + "/"
+      + lunar[2];
+
+  }catch(e){
+
+    return "";
+
+  }
+
+}
+
+
+/* =========================================================
+   CHẠY NGAY KHI MỞ TRANG
+   ========================================================= */
+
+load();
+
+</script>
+
+</body>
+</html>
