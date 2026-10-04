@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Lịch công tác</title>
 
 <style>
 :root{
-  --navy:#0b4b87;
-  --navy-dark:#083b6d;
-  --blue:#1769aa;
-  --blue-soft:#eaf4ff;
-  --bg:#f3f7fb;
+  --navy:#0a3f78;
+  --navy2:#0e5a9c;
+  --blue:#1674bd;
+  --blue2:#eaf5ff;
+  --bg:#eef5fb;
   --white:#fff;
-  --text:#17324f;
-  --muted:#6b7f95;
-  --line:#d8e4ef;
-  --red:#b42318;
-  --red-soft:#fdeeee;
+  --text:#17324d;
+  --muted:#6b7f93;
+  --line:#d8e5f0;
+  --red:#b3261e;
+  --red2:#fff0ef;
+  --shadow:0 8px 24px rgba(25,72,111,.08);
 }
 
 *{
@@ -34,22 +34,39 @@ body{
   background:var(--bg);
   color:var(--text);
   font-family:
-    Arial,
+    "Aptos",
     "Segoe UI",
+    "Helvetica Neue",
+    Arial,
     sans-serif;
+  font-size:16px;
+  line-height:1.45;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+button,
+a{
+  font-family:inherit;
 }
 
 /* ================= HEADER ================= */
 
 .top{
-  background:linear-gradient(135deg,var(--navy-dark),var(--navy));
+  background:linear-gradient(
+    135deg,
+    #08396d 0%,
+    #0a4b88 58%,
+    #0c5a99 100%
+  );
   color:#fff;
-  padding:22px 18px 20px;
+  box-shadow:0 4px 16px rgba(18,57,91,.16);
 }
 
 .topin{
-  width:min(100%,1000px);
+  width:min(1120px,100%);
   margin:auto;
+  padding:20px 18px 18px;
 }
 
 .brand{
@@ -60,81 +77,77 @@ body{
 }
 
 .logo{
-  width:68px;
-  height:68px;
+  width:64px;
+  height:64px;
   border-radius:50%;
   background:#fff;
-  border:2px solid #dcecff;
+  padding:3px;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
   flex:none;
+  box-shadow:0 2px 8px rgba(0,0,0,.14);
 }
 
 .logo img{
   width:100%;
   height:100%;
   object-fit:contain;
-}
-
-.logo-fallback{
-  display:none;
-  color:#0b4b87;
-  font-size:9px;
-  font-weight:800;
-  line-height:1.1;
-  text-align:center;
+  border-radius:50%;
 }
 
 .title{
-  font-size:36px;
-  font-weight:900;
-  letter-spacing:.2px;
+  font-size:34px;
+  font-weight:800;
+  letter-spacing:.1px;
+  line-height:1.1;
 }
 
 /* ================= WEEK NAV ================= */
 
 .weeknav{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns:1fr 1.08fr 1fr;
   gap:10px;
 }
 
 .weekbtn{
-  min-height:54px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.75);
-  background:transparent;
+  min-height:52px;
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:12px;
+  background:rgba(255,255,255,.03);
   color:#fff;
-  font-size:18px;
+  font-size:17px;
   font-weight:800;
   cursor:pointer;
+  transition:.15s;
+}
+
+.weekbtn:hover{
+  background:rgba(255,255,255,.1);
 }
 
 .weekbtn.current{
   background:#fff;
   color:var(--blue);
-}
-
-.weekbtn:active{
-  transform:scale(.99);
+  border-color:#fff;
 }
 
 /* ================= MAIN ================= */
 
 .wrap{
-  width:min(100%,1000px);
+  width:min(1120px,100%);
   margin:auto;
-  padding:20px 14px 60px;
+  padding:20px 18px 48px;
 }
 
 .weekrange{
   text-align:center;
+  color:#58738e;
   font-size:16px;
-  color:var(--muted);
   font-weight:700;
-  margin:4px 0 18px;
+  margin:2px 0 16px;
+  letter-spacing:.1px;
 }
 
 /* ================= DAYS ================= */
@@ -142,84 +155,89 @@ body{
 .days{
   display:grid;
   grid-template-columns:repeat(7,1fr);
-  gap:7px;
-  margin-bottom:20px;
+  gap:8px;
+  margin-bottom:18px;
 }
 
 .day{
   background:#fff;
   border:1px solid var(--line);
-  border-radius:12px;
-  padding:10px 3px;
+  border-radius:13px;
+  min-height:76px;
+  padding:10px 4px;
   text-align:center;
   cursor:pointer;
-  min-height:74px;
+  transition:.15s;
+  box-shadow:0 2px 5px rgba(30,74,108,.03);
 }
 
 .day:hover{
-  border-color:#8db9df;
-}
-
-.day.active{
-  background:var(--blue);
-  color:#fff;
-  border-color:var(--blue);
-  box-shadow:0 4px 12px rgba(23,105,170,.18);
+  transform:translateY(-1px);
+  border-color:#9fc5e5;
 }
 
 .day.today{
-  border:2px solid var(--blue);
+  border:2px solid #5b9dce;
 }
 
-.day.active.today{
-  border-color:#fff;
+.day.active{
+  background:linear-gradient(
+    180deg,
+    #1b76ba,
+    #1265a6
+  );
+  color:#fff;
+  border-color:#1265a6;
+  box-shadow:0 7px 16px rgba(19,100,166,.18);
 }
 
 .day .dow{
   font-size:12px;
-  font-weight:800;
+  font-weight:900;
   opacity:.8;
 }
 
 .day .date{
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
   margin-top:5px;
 }
 
-/* ================= SELECTED DAY ================= */
+/* ================= DAY HEADER ================= */
 
 .head{
   background:#fff;
   border:1px solid var(--line);
   border-radius:16px;
-  padding:17px 18px;
-  margin-bottom:14px;
+  padding:16px 18px;
+  margin-bottom:13px;
+  box-shadow:var(--shadow);
 }
 
 .head-title{
   font-size:24px;
-  font-weight:900;
+  font-weight:800;
   color:var(--navy);
+  letter-spacing:.05px;
 }
 
 .head-sub{
-  margin-top:5px;
-  font-size:14px;
+  margin-top:4px;
   color:var(--muted);
+  font-size:14px;
 }
 
-/* ================= EVENTS ================= */
+/* ================= EVENT ================= */
 
 .event{
   display:grid;
-  grid-template-columns:105px minmax(0,1fr);
+  grid-template-columns:112px minmax(0,1fr);
   background:#fff;
   border:1px solid var(--line);
   border-radius:16px;
-  margin-bottom:12px;
   overflow:hidden;
-  box-shadow:0 2px 8px rgba(21,54,87,.05);
+  margin-bottom:12px;
+  box-shadow:var(--shadow);
 }
 
 .period{
@@ -227,57 +245,60 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  padding:14px 8px;
-  border-right:1px solid var(--line);
   text-align:center;
+  padding:13px 7px;
+  border-right:1px solid var(--line);
 }
 
 .period.morning{
-  background:var(--red-soft);
+  background:var(--red2);
   color:var(--red);
 }
 
 .period.afternoon{
-  background:var(--blue-soft);
+  background:var(--blue2);
   color:var(--blue);
 }
 
 .period-name{
   font-size:14px;
-  font-weight:900;
+  font-weight:800;
+  letter-spacing:.2px;
 }
 
 .time{
   font-size:27px;
-  font-weight:900;
+  font-weight:800;
   margin-top:5px;
   white-space:nowrap;
+  letter-spacing:.2px;
 }
 
 .ec{
-  padding:16px 17px;
+  padding:15px 18px;
   min-width:0;
 }
 
 .ec-title{
   font-size:19px;
-  line-height:1.4;
-  font-weight:900;
+  line-height:1.42;
+  font-weight:750;
   color:var(--text);
+  letter-spacing:.05px;
 }
 
 .place{
-  margin-top:8px;
+  margin-top:7px;
+  color:#587086;
   font-size:15px;
   line-height:1.45;
-  color:#52677e;
 }
 
 .actions{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-  margin-top:12px;
+  margin-top:11px;
 }
 
 .action{
@@ -286,18 +307,18 @@ body{
   gap:5px;
   padding:8px 11px;
   border-radius:9px;
-  background:var(--blue-soft);
+  background:var(--blue2);
   color:var(--blue);
   text-decoration:none;
-  font-size:14px;
-  font-weight:800;
+  font-size:13px;
+  font-weight:900;
 }
 
 .action:hover{
   background:#dceeff;
 }
 
-/* ================= EMPTY / LOADING ================= */
+/* ================= STATES ================= */
 
 .loading,
 .empty,
@@ -309,34 +330,33 @@ body{
   text-align:center;
   color:var(--muted);
   font-size:16px;
+  box-shadow:var(--shadow);
 }
 
 .error{
-  color:#a61b1b;
-  background:#fff7f7;
+  color:#a61d1d;
+  background:#fff8f8;
   border-color:#efcccc;
 }
 
-/* ================= FOOTER ================= */
-
 .footer{
   text-align:center;
-  color:#8a9aae;
-  font-size:13px;
-  padding:10px 0 20px;
+  color:#8a9bad;
+  font-size:12px;
+  padding:0 0 22px;
 }
 
 /* ================= MOBILE ================= */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-  .top{
-    padding:16px 12px 17px;
+  .topin{
+    padding:15px 12px 14px;
   }
 
   .brand{
     gap:12px;
-    margin-bottom:15px;
+    margin-bottom:14px;
   }
 
   .logo{
@@ -353,23 +373,24 @@ body{
   }
 
   .weekbtn{
-    min-height:48px;
-    font-size:15px;
-    padding:0 5px;
+    min-height:47px;
+    font-size:14px;
+    padding:0 4px;
+    border-radius:10px;
   }
 
   .wrap{
-    padding:14px 10px 50px;
+    padding:14px 10px 42px;
   }
 
   .weekrange{
     font-size:15px;
-    margin:3px 0 13px;
+    margin-bottom:12px;
   }
 
   .days{
     gap:4px;
-    margin-bottom:14px;
+    margin-bottom:13px;
   }
 
   .day{
@@ -383,7 +404,7 @@ body{
   }
 
   .day .date{
-    font-size:18px;
+    font-size:19px;
   }
 
   .head{
@@ -405,7 +426,7 @@ body{
   }
 
   .period{
-    padding:12px 4px;
+    padding:11px 3px;
   }
 
   .period-name{
@@ -429,7 +450,7 @@ body{
   }
 
   .action{
-    font-size:13px;
+    font-size:12px;
     padding:7px 9px;
   }
 }
@@ -446,15 +467,9 @@ body{
 
       <div class="logo">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Logo_MTTQ_Vi%E1%BB%87t_Nam.svg/240px-Logo_MTTQ_Vi%E1%BB%87t_Nam.svg.png"
-          alt="MTTQ"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+          src="Logo%20MTTQ%20(1).png"
+          alt="Logo MTTQ Việt Nam"
         >
-        <div class="logo-fallback">
-          MẶT TRẬN<br>
-          TQ<br>
-          LÀO CAI
-        </div>
       </div>
 
       <div class="title">
@@ -516,32 +531,24 @@ body{
 
 <script>
 
-/* =========================================================
-   GOOGLE APPS SCRIPT WEB APP
-   ========================================================= */
-
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbwnLLNPn7Vsxoqs9gOi0UH_iMtC_2it12QlHeBfUVyhiOalsnqyu9ga2u4OIVKN9WtJww/exec";
-
-
-/* =========================================================
-   BIẾN
-   ========================================================= */
+"https://script.google.com/macros/s/AKfycbwnLLNPn7Vsxoqs9gOi0UH_iMtC_2it12QlHeBfUVyhiOalsnqyu9ga2u4OIVKN9WtJww/exec";
 
 let data = [];
 
-let weekStart = monday(new Date());
+let weekStart =
+  monday(new Date());
 
-let selectedDate = new Date();
+let selectedDate =
+  new Date();
 
 
-/* =========================================================
-   LOAD DỮ LIỆU TỪ GOOGLE SHEET
-   ========================================================= */
+/* ================= LOAD ================= */
 
 function load(){
 
-  const old = document.getElementById("jsonp");
+  const old =
+    document.getElementById("jsonp");
 
   if(old){
     old.remove();
@@ -550,44 +557,34 @@ function load(){
   const callback =
     "lichCallback_" + Date.now();
 
-  window[callback] = function(result){
+  window[callback] =
+    function(result){
 
-    try{
-
-      data = Array.isArray(result)
-        ? result
-        : [];
+      data =
+        Array.isArray(result)
+          ? result
+          : [];
 
       delete window[callback];
 
-      const script =
+      const s =
         document.getElementById("jsonp");
 
-      if(script){
-        script.remove();
+      if(s){
+        s.remove();
       }
 
       render();
 
-    }catch(error){
-
-      console.error(error);
-
-      showError(
-        "Không thể xử lý dữ liệu lịch công tác."
-      );
-
-    }
-
-  };
+    };
 
 
-  const script =
+  const s =
     document.createElement("script");
 
-  script.id = "jsonp";
+  s.id = "jsonp";
 
-  script.src =
+  s.src =
     API_URL +
     "?callback=" +
     callback +
@@ -595,101 +592,101 @@ function load(){
     Date.now();
 
 
-  script.onerror = function(){
+  s.onerror =
+    function(){
 
-    delete window[callback];
+      delete window[callback];
 
-    showError(
-      "Không kết nối được với Google Sheet. Vui lòng thử tải lại trang."
-    );
+      showError(
+        "Không kết nối được với dữ liệu lịch. Vui lòng tải lại trang."
+      );
 
-  };
+    };
 
 
-  document.body.appendChild(script);
+  document.body.appendChild(s);
 
 }
 
 
-/* =========================================================
-   NGÀY - TUẦN
-   ========================================================= */
+/* ================= DATE ================= */
 
-function monday(date){
+function monday(d){
 
-  const d = new Date(date);
+  const x =
+    new Date(d);
 
-  d.setHours(0,0,0,0);
-
-  const day = d.getDay();
-
-  const diff =
-    day === 0
-      ? -6
-      : 1 - day;
-
-  d.setDate(
-    d.getDate() + diff
+  x.setHours(
+    0,0,0,0
   );
 
-  return d;
+  const n =
+    x.getDay();
 
-}
-
-
-function addDays(date, number){
-
-  const d = new Date(date);
-
-  d.setDate(
-    d.getDate() + number
+  x.setDate(
+    x.getDate() +
+    (n === 0 ? -6 : 1-n)
   );
 
-  return d;
+  return x;
 
 }
 
 
-function key(date){
+function addDays(d,n){
 
-  return [
-    date.getFullYear(),
-    String(date.getMonth()+1).padStart(2,"0"),
-    String(date.getDate()).padStart(2,"0")
-  ].join("-");
+  const x =
+    new Date(d);
+
+  x.setDate(
+    x.getDate() + n
+  );
+
+  return x;
 
 }
 
 
-/* =========================================================
-   ĐỌC NGÀY TỪ GOOGLE SHEET
-   Hỗ trợ dd/MM/yyyy
-   ========================================================= */
+function key(d){
 
-function parseDate(value){
+  return d.getFullYear()
+    + "-"
+    + String(
+        d.getMonth()+1
+      ).padStart(2,"0")
+    + "-"
+    + String(
+        d.getDate()
+      ).padStart(2,"0");
 
-  if(!value){
+}
+
+
+/* ================= PARSE DATE ================= */
+
+function parseDate(v){
+
+  if(!v){
     return null;
   }
 
-  const text =
-    String(value).trim();
-
   const p =
-    text.split("/");
+    String(v)
+      .trim()
+      .split("/");
 
   if(p.length === 3){
 
     return new Date(
       Number(p[2]),
-      Number(p[1]) - 1,
+      Number(p[1])-1,
       Number(p[0])
     );
 
   }
 
   const d =
-    new Date(text);
+    new Date(v);
 
   return isNaN(d)
     ? null
@@ -698,60 +695,83 @@ function parseDate(value){
 }
 
 
-/* =========================================================
-   ĐỊNH DẠNG
-   ========================================================= */
+/* ================= FORMAT ================= */
 
-function formatDate(date){
+function formatDate(d){
 
-  return String(date.getDate()).padStart(2,"0")
-    + "/"
-    + String(date.getMonth()+1).padStart(2,"0")
-    + "/"
-    + date.getFullYear();
-
-}
-
-
-function formatShort(date){
-
-  return String(date.getDate()).padStart(2,"0")
-    + "/"
-    + String(date.getMonth()+1).padStart(2,"0");
+  return String(
+    d.getDate()
+  ).padStart(2,"0")
+  + "/"
+  + String(
+    d.getMonth()+1
+  ).padStart(2,"0")
+  + "/"
+  + d.getFullYear();
 
 }
 
 
-function formatTime(value){
+function shortDate(d){
 
-  if(!value){
+  return String(
+    d.getDate()
+  ).padStart(2,"0")
+  + "/"
+  + String(
+    d.getMonth()+1
+  ).padStart(2,"0");
+
+}
+
+
+function formatTime(v){
+
+  if(!v){
     return "";
   }
 
-  const text =
-    String(value).trim();
+  const m =
+    String(v).match(
+      /(\d{1,2})\s*[:h]\s*(\d{1,2})/i
+    );
 
-  const match =
-    text.match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);
+  if(m){
 
-  if(match){
-
-    return String(match[1]).padStart(2,"0")
-      + ":"
-      + String(match[2]).padStart(2,"0");
+    return String(
+      m[1]
+    ).padStart(2,"0")
+    + ":"
+    + String(
+      m[2]
+    ).padStart(2,"0");
 
   }
 
-  return text;
+  return String(v);
 
 }
 
 
-/* =========================================================
-   THỨ
-   ========================================================= */
+function timeMinutes(v){
 
-const DOW = [
+  const m =
+    String(v || "")
+      .match(
+        /(\d{1,2})\s*[:h]\s*(\d{1,2})/i
+      );
+
+  return m
+    ? Number(m[1])*60 + Number(m[2])
+    : 9999;
+
+}
+
+
+/* ================= DAYS ================= */
+
+const DOW =
+[
   "CN",
   "T2",
   "T3",
@@ -762,26 +782,22 @@ const DOW = [
 ];
 
 
-/* =========================================================
-   NHÓM SỰ KIỆN
-   ========================================================= */
-
-function eventsOn(date){
+function eventsOn(d){
 
   const k =
-    key(date);
+    key(d);
 
   return data
-    .filter(item => {
+    .filter(function(x){
 
-      const d =
-        parseDate(item.date);
+      const z =
+        parseDate(x.date);
 
-      return d &&
-        key(d) === k;
+      return z &&
+        key(z) === k;
 
     })
-    .sort((a,b) => {
+    .sort(function(a,b){
 
       return timeMinutes(a.time)
         - timeMinutes(b.time);
@@ -791,31 +807,7 @@ function eventsOn(date){
 }
 
 
-/* =========================================================
-   TÍNH PHÚT
-   ========================================================= */
-
-function timeMinutes(value){
-
-  const text =
-    String(value || "");
-
-  const m =
-    text.match(/(\d{1,2})\s*[:h]\s*(\d{1,2})/i);
-
-  if(!m){
-    return 9999;
-  }
-
-  return Number(m[1]) * 60
-    + Number(m[2]);
-
-}
-
-
-/* =========================================================
-   TUẦN
-   ========================================================= */
+/* ================= RENDER ================= */
 
 function render(){
 
@@ -830,23 +822,26 @@ function render(){
 
 function renderRange(){
 
-  const end =
-    addDays(weekStart,6);
+  const e =
+    addDays(
+      weekStart,
+      6
+    );
 
-  document.getElementById("range").textContent =
-    "Tuần " +
-    formatShort(weekStart) +
-    " – " +
-    formatShort(end) +
-    "/" +
-    end.getFullYear();
+  document.getElementById(
+    "range"
+  ).textContent =
+    "Tuần "
+    + shortDate(weekStart)
+    + " – "
+    + shortDate(e)
+    + "/"
+    + e.getFullYear();
 
 }
 
 
-/* =========================================================
-   HIỂN THỊ 7 NGÀY
-   ========================================================= */
+/* ================= DAYS ================= */
 
 function renderDays(){
 
@@ -855,24 +850,44 @@ function renderDays(){
 
   box.innerHTML = "";
 
-  for(let i=0;i<7;i++){
+  for(
+    let i=0;
+    i<7;
+    i++
+  ){
 
     const d =
-      addDays(weekStart,i);
+      addDays(
+        weekStart,
+        i
+      );
 
     const div =
-      document.createElement("div");
-
-    const today =
-      key(d) === key(new Date());
+      document.createElement(
+        "div"
+      );
 
     const active =
-      key(d) === key(selectedDate);
+      key(d) ===
+      key(selectedDate);
+
+    const today =
+      key(d) ===
+      key(new Date());
 
     div.className =
       "day"
-      + (active ? " active" : "")
-      + (today ? " today" : "");
+      + (
+        active
+          ? " active"
+          : ""
+      )
+      + (
+        today
+          ? " today"
+          : ""
+      );
+
 
     div.innerHTML =
       '<div class="dow">'
@@ -881,6 +896,7 @@ function renderDays(){
       + '<div class="date">'
       + d.getDate()
       + '</div>';
+
 
     div.onclick =
       function(){
@@ -899,6 +915,7 @@ function renderDays(){
 
       };
 
+
     box.appendChild(div);
 
   }
@@ -906,39 +923,44 @@ function renderDays(){
 }
 
 
-/* =========================================================
-   NGÀY ĐANG CHỌN
-   ========================================================= */
+/* ================= SELECTED DAY ================= */
 
 function renderSelectedDay(){
 
   const list =
     eventsOn(selectedDate);
 
-  const head =
-    document.getElementById("head");
 
-  head.innerHTML =
+  document.getElementById(
+    "head"
+  ).innerHTML =
 
     '<div class="head">'
+
     + '<div class="head-title">'
-    + DOW[selectedDate.getDay()]
+    + DOW[
+        selectedDate.getDay()
+      ]
     + " - "
     + formatDate(selectedDate)
     + '</div>'
+
     + '<div class="head-sub">'
     + lunarText(selectedDate)
     + '</div>'
+
     + '</div>';
 
 
-  const schedule =
-    document.getElementById("schedule");
+  const box =
+    document.getElementById(
+      "schedule"
+    );
 
 
-  if(list.length === 0){
+  if(!list.length){
 
-    schedule.innerHTML =
+    box.innerHTML =
       '<div class="empty">'
       + 'Không có lịch công tác trong ngày này.'
       + '</div>';
@@ -948,30 +970,27 @@ function renderSelectedDay(){
   }
 
 
-  schedule.innerHTML =
-    list.map(eventHtml).join("");
+  box.innerHTML =
+    list
+      .map(eventHtml)
+      .join("");
 
 }
 
 
-/* =========================================================
-   HIỂN THỊ MỘT LỊCH
-   ========================================================= */
+/* ================= EVENT ================= */
 
-function eventHtml(item){
-
-  const minutes =
-    timeMinutes(item.time);
+function eventHtml(x){
 
   const morning =
-    minutes < 720;
+    timeMinutes(x.time) < 720;
 
   const period =
     morning
       ? "Sáng"
       : "Chiều";
 
-  const periodClass =
+  const cls =
     morning
       ? "morning"
       : "afternoon";
@@ -980,22 +999,30 @@ function eventHtml(item){
   let actions = "";
 
 
-  if(isUrl(item.file)){
+  if(isUrl(x.file)){
 
     actions +=
-      '<a class="action" target="_blank" href="'
-      + escapeHtml(item.file)
-      + '">📎 Tài liệu</a>';
+      '<a class="action" '
+      + 'target="_blank" '
+      + 'href="'
+      + esc(x.file)
+      + '">'
+      + '📎 Tài liệu'
+      + '</a>';
 
   }
 
 
-  if(isUrl(item.prep)){
+  if(isUrl(x.prep)){
 
     actions +=
-      '<a class="action" target="_blank" href="'
-      + escapeHtml(item.prep)
-      + '">📑 Chuẩn bị</a>';
+      '<a class="action" '
+      + 'target="_blank" '
+      + 'href="'
+      + esc(x.prep)
+      + '">'
+      + '📑 Chuẩn bị'
+      + '</a>';
 
   }
 
@@ -1004,43 +1031,48 @@ function eventHtml(item){
 
     '<article class="event">'
 
-      + '<div class="period '
-      + periodClass
-      + '">'
+    + '<div class="period '
+    + cls
+    + '">'
 
-        + '<div class="period-name">'
-        + period
-        + '</div>'
+    + '<div class="period-name">'
+    + period
+    + '</div>'
 
-        + '<div class="time">'
-        + escapeHtml(formatTime(item.time))
-        + '</div>'
+    + '<div class="time">'
+    + esc(
+        formatTime(x.time)
+      )
+    + '</div>'
 
-      + '</div>'
+    + '</div>'
 
-      + '<div class="ec">'
+    + '<div class="ec">'
 
-        + '<div class="ec-title">'
-        + escapeHtml(item.title || "")
-        + '</div>'
+    + '<div class="ec-title">'
+    + esc(
+        x.title || ""
+      )
+    + '</div>'
 
-        + (
-          item.place
-          ? '<div class="place">📍 '
-            + escapeHtml(item.place)
-            + '</div>'
-          : ''
-        )
+    + (
+      x.place
+        ? '<div class="place">'
+          + '📍 '
+          + esc(x.place)
+          + '</div>'
+        : ""
+    )
 
-        + (
-          actions
-          ? '<div class="actions">'
-            + actions
-            + '</div>'
-          : ''
-        )
+    + (
+      actions
+        ? '<div class="actions">'
+          + actions
+          + '</div>'
+        : ""
+    )
 
-      + '</div>'
+    + '</div>'
 
     + '</article>'
 
@@ -1049,20 +1081,16 @@ function eventHtml(item){
 }
 
 
-/* =========================================================
-   KIỂM TRA LINK
-   ========================================================= */
+/* ================= LINKS ================= */
 
-function isUrl(value){
-
-  if(!value){
-    return false;
-  }
+function isUrl(v){
 
   try{
 
     const u =
-      new URL(String(value).trim());
+      new URL(
+        String(v || "").trim()
+      );
 
     return (
       u.protocol === "http:"
@@ -1079,13 +1107,11 @@ function isUrl(value){
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
+/* ================= ESCAPE ================= */
 
-function escapeHtml(value){
+function esc(v){
 
-  return String(value || "")
+  return String(v || "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
     .replace(/>/g,"&gt;")
@@ -1095,14 +1121,15 @@ function escapeHtml(value){
 }
 
 
-/* =========================================================
-   CHUYỂN TUẦN
-   ========================================================= */
+/* ================= WEEK ================= */
 
-function moveWeek(days){
+function moveWeek(n){
 
   weekStart =
-    addDays(weekStart,days);
+    addDays(
+      weekStart,
+      n
+    );
 
   selectedDate =
     new Date(weekStart);
@@ -1115,7 +1142,9 @@ function moveWeek(days){
 function goCurrentWeek(){
 
   weekStart =
-    monday(new Date());
+    monday(
+      new Date()
+    );
 
   selectedDate =
     new Date();
@@ -1125,44 +1154,46 @@ function goCurrentWeek(){
 }
 
 
-/* =========================================================
-   LỖI
-   ========================================================= */
+function showError(m){
 
-function showError(message){
-
-  document.getElementById("schedule").innerHTML =
+  document.getElementById(
+    "schedule"
+  ).innerHTML =
     '<div class="error">'
-    + escapeHtml(message)
+    + esc(m)
     + '</div>';
 
 }
 
 
-/* =========================================================
-   ÂM LỊCH
-   ========================================================= */
+/* ================= ÂM LỊCH ================= */
 
 function INT(x){
-
   return Math.floor(x);
-
 }
 
 
-function jdFromDate(dd,mm,yy){
+function jdFromDate(
+  dd,
+  mm,
+  yy
+){
 
-  const a =
-    INT((14-mm)/12);
+  let a =
+    INT(
+      (14-mm)/12
+    );
 
-  const y =
+  let y =
     yy + 4800 - a;
 
-  const m =
+  let m =
     mm + 12*a - 3;
 
   return dd
-    + INT((153*m+2)/5)
+    + INT(
+        (153*m+2)/5
+      )
     + 365*y
     + INT(y/4)
     - INT(y/100)
@@ -1172,44 +1203,13 @@ function jdFromDate(dd,mm,yy){
 }
 
 
-function jdToDate(jd){
-
-  let a =
-    jd + 32044;
-
-  let b =
-    INT((4*a+3)/146097);
-
-  let c =
-    a - INT((146097*b)/4);
-
-  let d =
-    INT((4*c+3)/1461);
-
-  let e =
-    c - INT((1461*d)/4);
-
-  let m =
-    INT((5*e+2)/153);
-
-  let day =
-    e - INT((153*m+2)/5) + 1;
-
-  let month =
-    m + 3 - 12*INT(m/10);
-
-  let year =
-    100*b + d - 4800 + INT(m/10);
-
-  return [day,month,year];
-
-}
-
-
-function getNewMoonDay(k,timeZone){
+function getNewMoonDay(
+  k,
+  tz
+){
 
   const T =
-    k / 1236.85;
+    k/1236.85;
 
   const T2 =
     T*T;
@@ -1220,18 +1220,22 @@ function getNewMoonDay(k,timeZone){
   const dr =
     Math.PI/180;
 
-  let Jd1 =
+  let J =
     2415020.75933
     + 29.53058868*k
     + 0.0001178*T2
     - 0.000000155*T3;
 
-  Jd1 +=
+  J +=
     0.00033 *
     Math.sin(
-      (166.56 + 132.87*T - 0.009173*T2)
-      * dr
+      (
+        166.56
+        + 132.87*T
+        - 0.009173*T2
+      ) * dr
     );
+
 
   const M =
     359.2242
@@ -1239,11 +1243,13 @@ function getNewMoonDay(k,timeZone){
     - 0.0000333*T2
     - 0.00000347*T3;
 
-  const Mpr =
+
+  const Mp =
     306.0253
     + 385.81691806*k
     + 0.0107306*T2
     + 0.00001236*T3;
+
 
   const F =
     21.2964
@@ -1251,71 +1257,98 @@ function getNewMoonDay(k,timeZone){
     - 0.0016528*T2
     - 0.00000239*T3;
 
-  let C1 =
-    (0.1734 - 0.000393*T)
+
+  let C =
+    (0.1734-0.000393*T)
       * Math.sin(M*dr)
+
     + 0.0021
       * Math.sin(2*M*dr)
+
     - 0.4068
-      * Math.sin(Mpr*dr)
+      * Math.sin(Mp*dr)
+
     + 0.0161
-      * Math.sin(2*Mpr*dr)
+      * Math.sin(2*Mp*dr)
+
     - 0.0004
-      * Math.sin(3*Mpr*dr)
+      * Math.sin(3*Mp*dr)
+
     + 0.0104
       * Math.sin(2*F*dr)
+
     - 0.0051
-      * Math.sin((M+Mpr)*dr)
+      * Math.sin(
+        (M+Mp)*dr
+      )
+
     - 0.0074
-      * Math.sin((M-Mpr)*dr)
+      * Math.sin(
+        (M-Mp)*dr
+      )
+
     + 0.0004
-      * Math.sin((2*F+M)*dr)
+      * Math.sin(
+        (2*F+M)*dr
+      )
+
     - 0.0004
-      * Math.sin((2*F-M)*dr)
+      * Math.sin(
+        (2*F-M)*dr
+      )
+
     - 0.0006
-      * Math.sin((2*F+Mpr)*dr)
-    + 0.0010
-      * Math.sin((2*F-Mpr)*dr)
+      * Math.sin(
+        (2*F+Mp)*dr
+      )
+
+    + 0.001
+      * Math.sin(
+        (2*F-Mp)*dr
+      )
+
     + 0.0005
-      * Math.sin((2*Mpr+M)*dr);
+      * Math.sin(
+        (2*Mp+M)*dr
+      );
 
-  let deltaT;
 
-  if(T < -11){
+  let dt =
+    T < -11
 
-    deltaT =
-      0.001
-      + 0.000839*T
-      + 0.0002261*T2
-      - 0.00000845*T3
-      - 0.000000081*T*T3;
+      ? 0.001
+        + 0.000839*T
+        + 0.0002261*T2
+        - 0.00000845*T3
+        - 0.000000081*T*T3
 
-  }else{
+      : -0.000278
+        + 0.000265*T
+        + 0.000262*T2;
 
-    deltaT =
-      -0.000278
-      + 0.000265*T
-      + 0.000262*T2;
-
-  }
-
-  const JdNew =
-    Jd1
-    + C1
-    - deltaT;
 
   return INT(
-    JdNew + 0.5 + timeZone/24
+    J
+    + C
+    - dt
+    + 0.5
+    + tz/24
   );
 
 }
 
 
-function getSunLongitude(jdn,timeZone){
+function getSunLongitude(
+  j,
+  tz
+){
 
   const T =
-    (jdn - 2451545.5 - timeZone/24)
-    / 36525;
+    (
+      j
+      - 2451545.5
+      - tz/24
+    ) / 36525;
 
   const T2 =
     T*T;
@@ -1323,58 +1356,95 @@ function getSunLongitude(jdn,timeZone){
   const dr =
     Math.PI/180;
 
+
   const M =
-    357.52910
-    + 35999.05030*T
+    357.5291
+    + 35999.0503*T
     - 0.0001559*T2
     - 0.00000048*T*T2;
+
 
   const L0 =
     280.46645
     + 36000.76983*T
     + 0.0003032*T2;
 
-  let DL =
-    (1.914600 - 0.004817*T - 0.000014*T2)
-      * Math.sin(M*dr)
-    + (0.019993 - 0.000101*T)
-      * Math.sin(2*M*dr)
-    + 0.000290
-      * Math.sin(3*M*dr);
 
   let L =
-    (L0 + DL) * dr;
+    (
+      L0
+
+      + (
+        1.9146
+        - 0.004817*T
+        - 0.000014*T2
+      )
+      * Math.sin(M*dr)
+
+      + (
+        0.019993
+        - 0.000101*T
+      )
+      * Math.sin(2*M*dr)
+
+      + 0.00029
+      * Math.sin(3*M*dr)
+
+    ) * dr;
+
 
   L =
-    L - Math.PI*2
-      * INT(L/(Math.PI*2));
+    L
+    - 2*Math.PI
+    * INT(
+      L/(2*Math.PI)
+    );
+
 
   return INT(
-    L / Math.PI * 6
+    L/Math.PI*6
   );
 
 }
 
 
-function getLunarMonth11(year,timeZone){
+function getLunarMonth11(
+  y,
+  tz
+){
 
   const off =
-    jdFromDate(31,12,year)
+    jdFromDate(
+      31,
+      12,
+      y
+    )
     - 2415021;
 
   const k =
-    INT(off/29.530588853);
+    INT(
+      off/29.530588853
+    );
 
   let nm =
-    getNewMoonDay(k,timeZone);
+    getNewMoonDay(
+      k,
+      tz
+    );
 
-  const sunLong =
-    getSunLongitude(nm,timeZone);
 
-  if(sunLong >= 9){
+  if(
+    getSunLongitude(
+      nm,
+      tz
+    ) >= 9
+  ){
 
     nm =
-      getNewMoonDay(k-1,timeZone);
+      getNewMoonDay(
+        k-1,
+        tz
+      );
 
   }
 
@@ -1383,38 +1453,49 @@ function getLunarMonth11(year,timeZone){
 }
 
 
-function getLeapMonthOffset(a11,timeZone){
+function getLeapMonthOffset(
+  a11,
+  tz
+){
 
   const k =
     INT(
       0.5
-      + (a11 - 2415021.076998695)
+      + (
+        a11
+        - 2415021.076998695
+      )
       / 29.530588853
     );
 
-  let last =
-    0;
 
-  let i =
-    1;
+  let last = 0;
+
+  let i = 1;
 
   let arc =
     getSunLongitude(
-      getNewMoonDay(k+i,timeZone),
-      timeZone
+      getNewMoonDay(
+        k+i,
+        tz
+      ),
+      tz
     );
+
 
   do{
 
-    last =
-      arc;
+    last = arc;
 
     i++;
 
     arc =
       getSunLongitude(
-        getNewMoonDay(k+i,timeZone),
-        timeZone
+        getNewMoonDay(
+          k+i,
+          tz
+        ),
+        tz
       );
 
   }while(
@@ -1422,97 +1503,127 @@ function getLeapMonthOffset(a11,timeZone){
     i < 14
   );
 
+
   return i-1;
 
 }
 
 
-function convertSolar2Lunar(dd,mm,yy,timeZone){
+function convertSolar2Lunar(
+  dd,
+  mm,
+  yy,
+  tz
+){
 
-  const dayNumber =
-    jdFromDate(dd,mm,yy);
+  const day =
+    jdFromDate(
+      dd,
+      mm,
+      yy
+    );
+
 
   const k =
     INT(
-      (dayNumber - 2415021.076998695)
+      (
+        day
+        - 2415021.076998695
+      )
       / 29.530588853
     );
 
-  let monthStart =
-    getNewMoonDay(k+1,timeZone);
 
-  if(monthStart > dayNumber){
+  let start =
+    getNewMoonDay(
+      k+1,
+      tz
+    );
 
-    monthStart =
-      getNewMoonDay(k,timeZone);
+
+  if(start > day){
+
+    start =
+      getNewMoonDay(
+        k,
+        tz
+      );
 
   }
 
+
   let a11 =
-    getLunarMonth11(yy,timeZone);
+    getLunarMonth11(
+      yy,
+      tz
+    );
 
   let b11 =
     a11;
 
-  let lunarYear;
+  let ly;
 
-  if(a11 >= monthStart){
 
-    lunarYear =
-      yy;
+  if(a11 >= start){
+
+    ly = yy;
 
     a11 =
       getLunarMonth11(
         yy-1,
-        timeZone
+        tz
       );
 
   }else{
 
-    lunarYear =
-      yy+1;
+    ly = yy+1;
 
     b11 =
       getLunarMonth11(
         yy+1,
-        timeZone
+        tz
       );
 
   }
 
-  const lunarDay =
-    dayNumber
-    - monthStart
-    + 1;
+
+  const ld =
+    day - start + 1;
+
 
   const diff =
     INT(
-      (monthStart - a11)
-      / 29
+      (start-a11)/29
     );
 
-  let lunarMonth =
+
+  const lm =
     diff + 11;
 
-  let lunarLeap =
-    0;
 
-  if(b11 - a11 > 365){
+  let leap = 0;
 
-    const leapMonthDiff =
+  let month = lm;
+
+
+  if(b11-a11 > 365){
+
+    const leapDiff =
       getLeapMonthOffset(
         a11,
-        timeZone
+        tz
       );
 
-    if(diff >= leapMonthDiff){
 
-      lunarMonth =
+    if(diff >= leapDiff){
+
+      month =
         diff + 10;
 
-      if(diff === leapMonthDiff){
 
-        lunarLeap = 1;
+      if(diff === leapDiff){
+
+        leap = 1;
 
       }
 
@@ -1520,46 +1631,53 @@ function convertSolar2Lunar(dd,mm,yy,timeZone){
 
   }
 
-  if(lunarMonth > 12){
 
-    lunarMonth -= 12;
+  if(month > 12){
+
+    month -= 12;
+
+  }
+
+
+  if(
+    month >= 11 &&
+    diff < 4
+  ){
+
+    ly--;
 
   }
 
-  if(lunarMonth >= 11 && diff < 4){
-
-    lunarYear--;
-
-  }
 
   return [
-    lunarDay,
-    lunarMonth,
-    lunarYear,
-    lunarLeap
+    ld,
+    month,
+    ly,
+    leap
   ];
 
 }
 
 
-function lunarText(date){
+function lunarText(d){
 
   try{
 
-    const lunar =
+    const l =
       convertSolar2Lunar(
-        date.getDate(),
-        date.getMonth()+1,
-        date.getFullYear(),
+        d.getDate(),
+        d.getMonth()+1,
+        d.getFullYear(),
         7
       );
 
+
     return "Âm lịch: "
-      + lunar[0]
+      + l[0]
       + "/"
-      + lunar[1]
+      + l[1]
       + "/"
-      + lunar[2];
+      + l[2];
 
   }catch(e){
 
@@ -1570,9 +1688,7 @@ function lunarText(date){
 }
 
 
-/* =========================================================
-   CHẠY NGAY KHI MỞ TRANG
-   ========================================================= */
+/* ================= START ================= */
 
 load();
 
